@@ -1,34 +1,31 @@
 # Maude's Technical Notes
-Technical notes on IoT protocols (Matter, WiFi 7) and CPE software architectures (prpl, RDK-B, OpenSync).
+Hi there, I'm Maude. This is the place where I jot down insights, architectural deep dives, and technical hurdles I've encountered in the world of wireless networking, IoT, and software in general.
 
+## Tech Stack
+- **Framework**: Material for MkDocs
+- **Deployment**: Github Pages & Github Actions
+- **Diagrams**: Mermaid
 
-## Structure
+### Structure
+```
 tech-notes/
-├── .github/workflows/     # CI/CD GitHub Actions auto-deployment
-├── docs/                  # All pages and assets
-│   ├── index.md           # Landing page
-│   ├── favicon.ico        # Browser icon
-│   ├── blog/              # 技術隨筆與部落格文章
-│   ├── wireless/          # WiFi & 3GPP 
-│   ├── matter/            # Matter learnings
-│   ├── cpe/               # CPE structures (OpenWRT, RDK-B, prpl, OpenSync/Plume etc.)
-│   └── assets/            # Static assets of the site
-│       ├── images/        
-│       ├── pdfs/          
-│       └── css/           
-├── mkdocs.yml             # MkDocs core configuration file
-└── README.md             
-
-tech-notes/
+├── .github/workflows/                        # CI/CD GitHub Actions auto-deployment
 ├── docs/
-│   ├── index.md           # Landing Page
-│   ├── blog/
-│   │   ├── posts/         # 所有的部落格文章都放這裡
+│   ├── index.md                              # Landing Page
+│   ├── blog-en/
+│   │   ├── posts/                            # Posts in English
 │   │   │   ├── 2026-01-26-wifi7-mlo.md
 │   │   │   └── 2025-12-20-matter-setup.md
-│   │   └── archive.md     # (選擇性) 歸檔頁面
-│   ├── wireless/          # 結構化文件 (非部落格)
-│   ├── assets/            # 圖片與媒體
+│   │   └── archive.md                  
+│   ├── blog-zh/
+│   │   ├── posts/                            # Posts in Traditional Chinese
+│   │   │   ├── 2026-01-26-wifi7-mlo.md
+│   │   │   └── 2025-12-20-matter-setup.md
+│   │   └── archive.md                        # Based on year
+│   ├── others/                               # Non-blog works
+│   ├── assets/                               # Static assets
 │   └── favicon.ico
-├── mkdocs.yml
-└── .github/workflows/deploy.yml
+├── mkdocs.yml                                # MkDocs core configuration file
+└── README.md
+```
+

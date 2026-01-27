@@ -13,16 +13,16 @@ theme:
     code: Roboto Mono
   palette:
     - scheme: default
-      primary: indigo
-      accent: indigo
+      primary: teal
+      accent: cyan
       toggle:
-        icon: material/brightness-7
+        icon: material/weather-sunny
         name: Switch to dark mode
     - scheme: slate
       primary: indigo
       accent: indigo
       toggle:
-        icon: material/brightness-4
+        icon: material/weather-night
         name: Switch to light mode
   features:
     - navigation.tabs # 頂部選單欄
@@ -50,26 +50,23 @@ extra:
       link: https://linkedin.com/in/meng-hsueh-shen
     - icon: fontawesome/brands/medium
       link: https://medium.com/@maudeshen
+  blog:
+    authors:
+      Maude:
+        name: Maude
+        avatar: https://github.com/maudes.png
+        url: https://github.com/maudes
 
 plugins:
   - search
-  - tags
   - blog:
-      id: blog-en
-      name: English Blog
-      endpoint: blog-en
-      blog_dir: blog-en
-      post_dir: blog-en/posts
-      archive_format: "yyyy"
+      blog_dir: .           
+      post_dir: .        
+      authors: true
       pagination_per_page: 10
-  - blog:
-      id: blog-zh
-      name: 中文部落格
-      endpoint: blog-zh
-      blog_dir: blog-zh
-      post_dir: blog-zh/posts
-      archive_format: "yyyy"
-      pagination_per_page: 10
+      post_readtime: true
+      # date_format: "%B %d, %Y"
+      archive: false      
   
 markdown_extensions:
   - pymdownx.highlight:
@@ -91,4 +88,3 @@ markdown_extensions:
 
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
-  -

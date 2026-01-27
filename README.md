@@ -11,20 +11,14 @@ Hi there, I'm Maude. This is the place where I jot down insights, architectural 
 tech-notes/
 ├── .github/workflows/                        # CI/CD GitHub Actions auto-deployment
 ├── docs/
-│   ├── index.md                              # Landing Page
-│   ├── blog-en/
-│   │   ├── posts/                            # Posts in English
+│   ├── blog/
+│   │   ├── posts/                            
 │   │   │   ├── 2026-03-26-wifi7-example.md
 │   │   │   └── 2026-02-20-matter-example.md
-│   │   └── archive.md                  
-│   ├── blog-zh/
-│   │   ├── posts/                            # Posts in Traditional Chinese
-│   │   │   ├── 2026-03-26-wifi7-example.md
-│   │   │   └── 2026-02-20-matter-example.md
-│   │   └── archive.md                        # Based on year
+│   │   └── index.md                  
 │   ├── others/                               # Non-blog works (still brainstorming)
-│   ├── assets/                               # Static assets
-│   └── favicon.ico
+│   │   └── index.md     
+│   └── assets/                               # Static assets
 ├── mkdocs.yml                                # MkDocs core configuration file
 └── README.md
 ```

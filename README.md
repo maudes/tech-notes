@@ -13,7 +13,6 @@ tech-notes/
 ├── docs/
 │   ├── blog/
 │   │   ├── posts/                            
-│   │   │   ├── 2026-03-26-wifi7-example.md
 │   │   │   └── 2026-02-20-matter-example.md
 │   │   └── index.md                  
 │   ├── others/                               # Non-blog works (still brainstorming)

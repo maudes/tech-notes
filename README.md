@@ -14,15 +14,15 @@ tech-notes/
 │   ├── index.md                              # Landing Page
 │   ├── blog-en/
 │   │   ├── posts/                            # Posts in English
-│   │   │   ├── 2026-01-26-wifi7-mlo.md
-│   │   │   └── 2025-12-20-matter-setup.md
+│   │   │   ├── 2026-03-26-wifi7-example.md
+│   │   │   └── 2026-02-20-matter-example.md
 │   │   └── archive.md                  
 │   ├── blog-zh/
 │   │   ├── posts/                            # Posts in Traditional Chinese
-│   │   │   ├── 2026-01-26-wifi7-mlo.md
-│   │   │   └── 2025-12-20-matter-setup.md
+│   │   │   ├── 2026-03-26-wifi7-example.md
+│   │   │   └── 2026-02-20-matter-example.md
 │   │   └── archive.md                        # Based on year
-│   ├── others/                               # Non-blog works
+│   ├── others/                               # Non-blog works (still brainstorming)
 │   ├── assets/                               # Static assets
 │   └── favicon.ico
 ├── mkdocs.yml                                # MkDocs core configuration file

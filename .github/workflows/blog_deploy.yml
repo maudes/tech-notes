@@ -1,0 +1,29 @@
+name: deploy-mkdocs
+on:
+  push:
+    branches:
+      - main  
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          pip install mkdocs-material 
+          # 如果你有用到其他外掛，記得在這裡加上去
+          # pip install mkdocs-minify-plugin 
+
+      - name: Build and Deploy
+        run: mkdocs gh-deploy --force

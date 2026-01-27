@@ -1,7 +1,5 @@
 ---
 date: 2026-02-20
-authors:
-  - Maude
 categories:
   - Matter
   - IoT

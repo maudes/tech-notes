@@ -9,7 +9,7 @@ Hi there, I'm Maude. This is the place where I jot down insights, architectural 
 ### Structure
 ```
 tech-notes/
-├── .github/workflows/                        # CI/CD GitHub Actions auto-deployment
+├── .github/workflows/                        # CI/CD GitHub Actions auto deployment
 ├── docs/
 │   ├── blog/
 │   │   ├── posts/                            

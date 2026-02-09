@@ -33,6 +33,6 @@ Now, I'm working in the CPE OEM industry to gain a deeper, ground-level understa
 
 For me, the answer is simple: Software is where the magic happens, but Hardware is where the reality begins. To build truly robust IoT solutions and seamless software experiences, I need to understand the "pipes" they run on. However, my heart remains firmly in the software realm. I believe that code is the ultimate tool for breaking limitations and turning hardware into something alive.
 
-This blog is my commitment to that belief. It's a bridge between my journalist's curiosity and a developer's logic. Here, I’ll document how I’m navigating the complexities of networking, always with the goal of building more intuitive, powerful software products.
+This blog is my commitment to that belief. Here, I’ll document how I’m navigating the complexities of networking, always with the goal of building more intuitive, powerful software products.
 
 Thanks for being part of my "After Life" journey. Let’s decode the world, one line of code at a time.

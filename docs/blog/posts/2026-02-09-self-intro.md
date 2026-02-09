@@ -7,6 +7,8 @@ categories:
 # Hello World! It's Maude from Taiwan.
 Hi there, I'm Maude. This is the place where I jot down learning notes, insights, architectural deep dives, and technical hurdles I've encountered in the world of wireless networking, IoT, and software development.
 
+<!-- more -->
+
 ### My "Previous Life" as a Curious Tech Journalist
 
 I began my career as a journalist, largely because writing is my strength (specifically in my native language) and I majored in Journalism at university.

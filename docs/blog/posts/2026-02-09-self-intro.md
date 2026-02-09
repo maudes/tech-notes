@@ -22,6 +22,7 @@ This is definitely not an easy journey, yet a challenging and grateful one. I me
 Imposter syndrome has been a constant companion on this journey. It's crucial to navigate thourgh and keep moving forward. 
 
 Looking back on my footprints:
+
 * Joined workshops like RoR, Laravel
 * Gained experience through internships and side-projects including SALASUSU and SmallSomebody
 * Got hired as a software PM for the first time thanks to the referring of colleagues

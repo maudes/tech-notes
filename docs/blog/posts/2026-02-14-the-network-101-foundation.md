@@ -83,8 +83,8 @@ graph TD
 
 ### Step-by-step network connections via CPEs
 
-1. **Client layer 7:** User triggers a request on the browser. For example, to open the "www.amazon.com", the system first uses Domain Name System (DNS) to look up the destination IP. 
-> *If Amazon uses Content Delivery Network (CDN) service (they do btw), then CDN services like Cloudflare or Akamai will allocate the optimal desitination IP based on factors like traffic and location.*
+1. **Client layer 7:** User triggers a request on the browser. For example, to open the "www.amazon.com", the system first uses Domain Name System (DNS) to look up the destination IP before an HTTPS connection could be established. 
+> *If Amazon uses Content Delivery Network (CDN) service (they do btw), then CDN services like Cloudflare or Akamai will allocate the optimal desitination IP (response time) based on factors like traffic, latency, server load and geographic location.*
 2. **Client layer 6:** With the destination IP, the message will be processed by the presentation layer handling tasks like encryption (SSL/TLS), compression,and data translation.
 3. **Client layer 5:** Once prepared, the message moves to the session layer which manages the communication session between local and remote hosts.
 4. **Client layer 4:** The TCP handshake is triggered for establishing a reliable conneciton. The message is then divided into segments, each with a TCP header containing the source port, destiniation port, sequence number and checksum.

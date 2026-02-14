@@ -23,7 +23,7 @@ The Open System Interconnection (OSI) model is the most commonly used framework 
 
 The table below provides a brief overview of how OSI layers are structured: 
 
-![OSI layers](/assets/osi-layers.png)
+![OSI layers](../../assets/osi-layers.png)
 
 The human-computer interaction, such as a typical "browser search" behaviour, occurs in the application layer. Once the request is sent, it will go from the application layer all the way to the physical layer before being routed to its destination. Along the way, the message is being wrapped with multiple "headers" through a process called "encapsulation": 
 > `<Message>`<br>

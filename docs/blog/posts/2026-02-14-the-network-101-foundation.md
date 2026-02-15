@@ -1,7 +1,7 @@
 ---
 date: 2026-02-14
 categories:
-  - Network101
+  - Network 101
   - CPE
 ---
 

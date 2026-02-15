@@ -1,7 +1,7 @@
 ---
 date: 2026-02-09
 categories:
-  - CareerPivot
+  - Career Pivot
   - IoT
 ---
 # Hello World! It's Maude from Taiwan.

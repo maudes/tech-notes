@@ -5,7 +5,7 @@ categories:
   - CPE
 ---
 
-# The Network 101: The Foundation
+# Network 101: The Foundation
 
 Hi all, this is the first article in a series of network introduction. In this post, I'll briefly introduce the basic network communication using a simple CPE (Customer Premises Equipment) connection flow to illustrate the idea. 
 

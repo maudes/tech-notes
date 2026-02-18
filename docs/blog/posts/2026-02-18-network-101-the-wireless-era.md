@@ -6,7 +6,7 @@ categories:
   - Use Case
 ---
 
-# The Network 101: The Wireless Era
+# Network 101: The Wireless Era
 
 How about starting your day with a cup of nice coffee and a quick scroll through emails and messages on your smartphone? 
 

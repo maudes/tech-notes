@@ -1,9 +1,9 @@
 ---
 date: 2026-02-18
 categories:
-  - Network101
+  - Network 101
   - Standards
-  - UseCase
+  - Use Case
 ---
 
 # The Network 101: The Wireless Era

@@ -8,15 +8,11 @@ categories:
 
 # Network 101: The Wireless Era
 
-How about starting your day with a cup of nice coffee and a quick scroll through emails and messages on your smartphone? 
-
-Nowadays, it is probably hard to imagine life without a network; or to be specific, a life without a wireless network.
+How about starting your day with a cup of nice coffee and a quick scroll through emails and messages on your smartphone? Nowadays, it is probably hard to imagine life without a network; or to be specific, a life without a wireless network.
 
 <!-- more -->
 
-Back in the days, I still remember how annoying it was to check a single tiny picture online. You had to dial-up for Internet access using a modem and an ethernet cable, accompanied by those "beep-beep" sounds. 
-
-Once you were finally online, it would take several minutes to download a standard 500×500 picture, rendering it pixel by pixel. Yet, today, we can see all high-definition pictures almost instantly, within milliseconds.
+Back in the days, I still remember how annoying it was to check a single tiny picture online. You had to dial-up for Internet access using a modem and an ethernet cable, accompanied by those "beep-beep" sounds. Once you were finally online, it would take several minutes to download a standard 500×500 picture, rendering it pixel by pixel. Yet, today, we can see all high-definition pictures almost instantly, within milliseconds.
 
 In this context, how did the Internet evolve? What is the actual difference between 5G/4G and Wi-Fi? Furthermore, why does my ISP keep pushing me to adopt a Wi-Fi 7 router over my old Wi-Fi 5 one? What do all these terms mean?
 

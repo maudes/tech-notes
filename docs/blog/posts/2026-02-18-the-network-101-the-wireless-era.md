@@ -141,7 +141,7 @@ The famous "5G Triangle" defined the diverse services:
 To deliver the next generation user experience, the 5G standard has releases a series of changes. 
 
 **R15, the foundation**
-First of all, it had further decoupled the low layer/ hardware strcture toward a service based architecture. It brought the idea of Standalone (**SA**) 5G network where the new structure was entirely different from the legacy system. However, considering the cost and reality, operators could choose a mixed infrastructure, Non-Standalone (**NSA**), for the 5G experience in the short-run by leveraging the existing 4G core network. 
+First of all, it had further decoupled the low layer/ hardware strcture toward a service based architecture(SBA). The concept is also known as "[OpenRAN](https://www.mdpi.com/2076-3417/12/1/408)". It brought the idea of Standalone (**SA**) 5G network where the new structure was entirely different from the legacy system. However, considering the cost and reality, operators could choose a mixed infrastructure, Non-Standalone (**NSA**), for the 5G experience in the short-run by leveraging the existing 4G core network. 
 
 This new structure offers an end-to-end flexibility or "**Network slicing**". The feature allows operators to deploy a true "Private Network". The demands usually come from the public sectors like first responders or law enforcement for ensuring the dedicated capacity for mission-critical operations.
 

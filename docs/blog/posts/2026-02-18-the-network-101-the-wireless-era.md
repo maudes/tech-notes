@@ -140,25 +140,29 @@ The famous "5G Triangle" defined the diverse services:
 
 To deliver the next generation user experience, the 5G standard has releases a series of changes. 
 
-**R15, the foundation**
+#### **R15, the foundation**
 First of all, it had further decoupled the low layer/ hardware strcture toward a service based architecture(SBA). The concept is also known as "[OpenRAN](https://www.mdpi.com/2076-3417/12/1/408)". It brought the idea of Standalone (**SA**) 5G network where the new structure was entirely different from the legacy system. However, considering the cost and reality, operators could choose a mixed infrastructure, Non-Standalone (**NSA**), for the 5G experience in the short-run by leveraging the existing 4G core network. 
 
 This new structure offers an end-to-end flexibility or "**Network slicing**". The feature allows operators to deploy a true "Private Network". The demands usually come from the public sectors like first responders or law enforcement for ensuring the dedicated capacity for mission-critical operations.
 
 Another major leap in 5G was the expansion into more bands and wider bandwidth, categorized as below:
-- **Sub 6 (+Massive MIMO), FR1**: Excellent penetration, wide coverage, long distance with more cost-effective infrastructure.
-- **mmWave (+Beamforming), FR2**: Poor penetration, high power consumption, but with extremely fast speed and high throughput.(Note: FWA uses mmWave.)
 
-**R16 enhancement**
-- Unlicensed spectrum
-- Advanced power saving and mobility
-- High precision positioning
-- Sidelink for vehicle to experience (V2X) use cases
-- Mission critical design
+* **Sub 6 (+Massive MIMO), FR1**: Excellent penetration, wide coverage, long distance with more cost-effective infrastructure.
 
-**R17 expansion**: 
-- **Reduced Capabilities (RedCap) aka 5G NR-Lite**: Focusing on IoT mid-tier (e.g. smart grid, wearables, sensors), filling the gap of the major three scenarios. 
-- **Non-terrestrial networks (NTN)**: Adding aerial communication such as satellites; operators including StarLink, Leo.
+* **mmWave (+Beamforming), FR2**: Poor penetration, high power consumption, but with extremely fast speed and high throughput.(Note: FWA uses mmWave.)
+
+#### **R16 enhancement**
+* Unlicensed spectrum
+* Advanced power saving and mobility
+* High precision positioning
+* Sidelink for vehicle to experience (V2X) use cases
+* Mission critical design
+
+#### **R17 expansion**: 
+
+* **Reduced Capabilities (RedCap) aka 5G NR-Lite**: Focusing on IoT mid-tier (e.g. smart grid, wearables, sensors), filling the gap of the major three scenarios. 
+
+* **Non-terrestrial networks (NTN)**: Adding aerial communication such as satellites; operators including StarLink, Leo.
 
 #### 5G-Advanced (R18~) and 6G forecast
 Features released from R18 onwards were called "5G Advanced". This signified the foundation architecture is completed, the focus has shifted toward enhancement that will bridge to the next generation, 6G.

@@ -104,9 +104,13 @@ As discussed above, the industry trend is clearly evolving from monolithic archi
 To fix this, HPU, a well-known hardware acceleration or hardware offload engine, has come to the discussion. The concept is straightforward: offload intensive workload from CPU to dedicated hardware. Engineers designed a "fast path" for requests successfully traverses the system end-to-end, any subsequent identical traffic should bypass the CPU entirely. 
 
 For example:
+
 - You request to access YouTube from your browser
+
 - The message travels through layers as we described in the network fundamental article, including has the router changed the IP address, port number or any potential data along the way
+
 - Hits the server end successfully, and returns to your browser for loading the resource of YouTube
+
 - Once the path is verified, any identical request (open YouTube on my browser) afterwards should not cost any CPU resource but directly copy-paste the behavior of the verified path. 
 
 *Just note, besides IP address updating, HPU also supports advanced features like VLAN tags, QoS management features required by the latest wireless standard.*

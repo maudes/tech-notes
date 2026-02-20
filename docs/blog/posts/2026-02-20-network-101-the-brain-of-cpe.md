@@ -125,9 +125,13 @@ This architecture reverses the roles of device and cloud, centralizing all decis
 With its "Cloud centralized control plane" design, OpenSync's capabilities expands far beyond LCM. It enables not only "App store like" update and maintenance, but also AI-driven dynamically control. 
 
 For example, a firewall security service on OpenSync:
+
 - The cloud identifies the potential attack pattern by analyzing the data collected from devices
+
 - The cloud pushes the real-time command to all connected devices simultaneously
+
 - The device receives and follows the instructions, updating its configuration immediately
+
 - The device reports the status back to the cloud
 
 At last, Plume had officially joined the prpl Foundation at the end of 2025. The decision forecasts an upcoming convergence between cloud-native structures and the ISP-centric design.

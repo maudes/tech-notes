@@ -3,6 +3,7 @@ date: 2026-02-18
 categories:
   - Network 101
   - Standards
+  - SDN
   - Use Case
 ---
 
@@ -130,14 +131,17 @@ Ring a bell? Yes, the iPhone story I mentioned in the Wi-Fi section. The launch 
 Before 5G, the path of MBB development was primarily on the end-user experience with phones. Yet, as shared in the Wi-Fi introduction, we're moving toward a fully connected world involving a broader range of devices. In this new landscape, the requests of network expanded to reliability, stability, and adaptability to a variety of specialized environments. 
 
 The famous "5G Triangle" defined the diverse services:
+
 - **Enhanced Mobile Broadband, eMBB**: Continue on improving the speed and throughput which could be deployed fast for commercial use.
+
 - **Ultra Reliable and Low Latency, uRLLC**: Designed for mission critical applications including autonomous vehicle, remote surgery where milliseconds counts.
+
 - **Massive Machine-Type Communication, mMTC**: Industrial IoT focused, specifically supporting on a massive number of connected devices with high power efficiency.
 
 To deliver the next generation user experience, the 5G standard has releases a series of changes. 
 
 #### **R15, the foundation**
-First of all, it had further decoupled the low layer/ hardware strcture toward a service based architecture(SBA). The concept is also known as "[OpenRAN](https://www.mdpi.com/2076-3417/12/1/408)". It brought the idea of Standalone (**SA**) 5G network where the new structure was entirely different from the legacy system. However, considering the cost and reality, operators could choose a mixed infrastructure, Non-Standalone (**NSA**), for the 5G experience in the short-run by leveraging the existing 4G core network. 
+First of all, 5G has further decoupled the low layer/ hardware strcture toward a service-based architecture (SBA). This enabled the Standalone (**SA**) 5G network where the architecture is entirely different from the legacy system. Instead of relying on vendor-specific hardware, operators can now adopt Commercial Off-The-Shelf (COTS) servers combined with a software defined transport network base station. The new framework allows for a more flexible and cost-effective structure. However, considering the deployment cost and practical realities, operators could choose a mixed infrastructure, Non-Standalone (**NSA**), for the 5G experience in the short term by leveraging the existing 4G core network. (If you're interested in how the decoupling and structural changes, you may refer to the "[OpenRAN](https://www.mdpi.com/2076-3417/12/1/408)".)
 
 This new structure offers an end-to-end flexibility or "**Network slicing**". The feature allows operators to deploy a true "Private Network". The demands usually come from the public sectors like first responders or law enforcement for ensuring the dedicated capacity for mission-critical operations.
 
@@ -158,7 +162,7 @@ Another major leap in 5G was the expansion into more bands and wider bandwidth, 
 
 * **Reduced Capabilities (RedCap) aka 5G NR-Lite**: Focusing on IoT mid-tier (e.g. smart grid, wearables, sensors), filling the gap of the major three scenarios. 
 
-* **Non-terrestrial networks (NTN)**: Adding aerial communication such as satellites; operators including StarLink, Leo.
+* **Non-terrestrial networks (NTN)**: Adding aerial communication such as satellites; operators including StarLink, Amazon Leo.
 
 #### 5G-Advanced (R18~) and 6G forecast
 Features released from R18 onwards were called "5G Advanced". This signified the foundation architecture is completed, the focus has shifted toward enhancement that will bridge to the next generation, 6G.

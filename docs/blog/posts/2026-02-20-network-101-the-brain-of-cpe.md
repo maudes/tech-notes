@@ -13,7 +13,7 @@ Now that we have a basic understanding of how data is transmitted through the OS
 
 <!-- more -->
 
-To most users, the role of a router is simply providing the Internet access. However based on the standards, we learn that it can do much more than a Wi-Fi access point. With the proper hardware and embedded chipset, it can support features including: 
+To most users, the role of a router is simply providing Internet access. However, based on the standards, we learn that it can do much more than a Wi-Fi access point. With the proper hardware and embedded chipset, it can support features including: 
 
 - Managed Quality of Services
 - Target Wake time, TWT
@@ -27,15 +27,15 @@ The scope of these features goes beyond physical and data link layers. As the la
 ***Keywords: #OpenWRT #prpl #RDKB #OpenSync #SDN***
 
 ## The Modern Structure of a Connected Device
-Companies constantly compete for market dominance, striving to become the industry standard. A famous example is the battle between 4G WiMAX v.s. LTE, led by Intel and mobile operators respectively. The profit behind the "winner takes all" is a powerful incentive, driving companies to invest big. Yet, this often leads to fragmented landscape with tons of vendor-specific standards that lack interoperability.
+Companies constantly compete for market dominance, striving to become the industry standard. A famous example is the battle between 4G WiMAX v.s. LTE, led by Intel and mobile operators respectively. The profit behind the "winner takes all" is a powerful incentive, driving companies to invest big. Yet, this often leads to a fragmented landscape with tons of vendor-specific standards that lack interoperability.
 
-High development cost has not only stifled the maket growth, and ultimately degraded the user experience. To address this, there is a growing trend in the CPE & ISP market to adopt the "modular" and "microservices" methodologies that has been the backbone of the software industry. 
+High development cost has not only stifled the market growth, and ultimately degraded the user experience. To address this, there is a growing trend in the CPE & ISP market to adopt the "modular" and "microservices" methodologies that have been the backbone of the software industry. 
 
 Before we dive into the impact, let's have a quick recap on how a connected device stacked. 
 ![simple-architecture](../../assets/simple-architecture.png)
-In my previous experience building platform strategies for smart lighting, the structure followed a similar but simpler logic. For example: the bulb uses a vendor's SoC and embedded SDK which includes the bootloarder, flash partitions for binaries, and core drivers. Then, our own SDK (or multiple SDKs) will be integrated on the top of chip vendor's stack to implement the "brand-specific" features. 
+In my previous experience building platform strategies for smart lighting, the structure followed a similar but simpler logic. For example: the bulb uses a vendor's SoC and embedded SDK which includes the bootloader, flash partitions for binaries, and core drivers. Then, our own SDK (or multiple SDKs) will be integrated on the top of chip vendors' stack to implement the "brand-specific" features. 
 
-These features ranges from defined manufactured Out-the-the-box (OOTB) behaviour, IoT data collection to edge computing, and management related agents. Finally, those configuration or collected data will be saved locally and synchronized with the cloud. User interfaces will update the configuration table later via the Cloud API. We can discuss more on this case in the next post about smart home.
+These features range from defined manufactured Out-the-the-box (OOTB) behaviour, IoT data collection to edge computing, and management related agents. Finally, those configuration or collected data will be saved locally and synchronized with the cloud. User interfaces will update the configuration table later via the Cloud API. We can discuss more on this in the other posts about smart homes.
 
 In the context of a CPE, the logic remains consistent with the previous example. However, due to its complexity (at least compared to smart bulbs), the architecture requires distinct communication layers. This includes southbound API (often implemented as hardware abstraction layer, HAL) for communicating with the hardware layer, and northbound API for interacting with the cloud and user interfaces. This separation is crucial for maintaining a flexible, scalable and efficient network structure.
 
@@ -47,7 +47,7 @@ Among all layers, the middleware is what defines the control and behaviour of a 
 3.  Above the middleware, OEM creates API to connect with assigned cloud services, such as an ISP's auto configuration server (ACS)
 4.  ISP primarily handles the user verification and add-on services to end-users
 
-In this structure, the actual brand owners have the least control. While they define features and validate the finished goods to ensure the quality, any minor adjustments depends heavily on the OEMs and chip vendors. The dependency makes it difficult to iterate or deploy advanced features after the initial release. Consequently, more operators are now choosing to build in-house software team or embrace open source frameworks to regain control over their product roadmap. 
+In this structure, the actual brand owners have the least control. While they define features and validate the finished goods to ensure the quality, any minor adjustments depend heavily on the OEMs and chip vendors. The dependency makes it difficult to iterate or deploy advanced features after the initial release. Consequently, more operators are now choosing to build in-house software teams or embrace open source frameworks to regain control over their product roadmap. 
 
 
 ## Key Frameworks & Standards
@@ -75,7 +75,7 @@ The BBF released the landmark "**TR-069 (CPE WAN Management Protocol, CWMP)**" s
 
 To meet modern demands, BBF later released "**TR-369  (User Service Platform, USP)**" in 2018 to succeed TR-069. The new standard supports the architecture for Lifecycle Management (LCM) and Linux Container Management (LxC/LxM) concept, allowing for a more modular and service-oriented approach. You can think of this as "app management" for the CPEs. Just as you update or delete an app on your smartphone, ISP can now independently manage specific services without reflashing the entire firmware. With LCM and LxM, USP has gradually become the industry standard for next-generation CPEs. 
 
-Additionally, they established "**TR-181**" as the standard data model for CPEs. This is heavily used in the northbound middleware communication, ensuring devices or agents are using the same language when exchanging network parameters. 
+Additionally, they established "**TR-181**" as the standard data model for CPEs. This is heavily used in northbound middleware communication, ensuring devices or agents are using the same language when exchanging network parameters. 
 
 ### RDK-B, 2013
 
@@ -126,7 +126,7 @@ Therefore, software companies like Plume decided to reshape the landscape by ref
 
 This architecture reverses the roles of device and cloud, centralizing all decision-making in the cloud. On the other hand, it reduces the role of the device from heavy edge computing workload to simple receive and execute. In addition, OpenSync is not intended to replace other frameworks; it is designed to integrate seamlessly with other platforms such as OpenWRT, RDK-B, and prpl.
 
-With its "Cloud centralized control plane" design, OpenSync's capabilities expands far beyond LCM. It enables not only "App store like" update and maintenance, but also AI-driven dynamically control. 
+With its "Cloud centralized control plane" design, OpenSync's capabilities expand far beyond LCM. It enables not only "App store like" update and maintenance, but also AI-driven dynamically control. 
 
 For example, a firewall security service on OpenSync:
 
@@ -144,9 +144,9 @@ At last, Plume had officially joined the prpl Foundation at the end of 2025. The
 
 Will there be a unified future for CPE frameworks? Based on current trends, the industry is moving steadily toward a more flexible, efficient, and cost-effect development path. According to BBF's [latest news release](https://www.broadband-forum.org/news/2026-02-19-obuspa-integrated-with-prpl-and-rdk/): the integration of the USP Agent (OBUSPA) with both prpl and RDK-B has reduced the development cycle from more than 9-18 months to as little as 2-4 weeks. That's an incredible leap in agility! 
 
-Once the architechture is unified, where would be the next battlefield for ISPs or OEMs? I believe the competition will shift toward the add-on software services, including advanced IoT capabilities, AI-driven QoS, and highly customizable network features as we've seen in the software evolution. 
+Once the architecture is unified, where would be the next battlefield for ISPs or OEMs? I believe the competition will shift toward the add-on software services, including advanced IoT capabilities, AI-driven QoS, and highly customizable network features as we've seen in the software evolution. 
 
-In the next post, I will share my experience on leading the Matter integration over millions in-field and newly manifactured smart lighting devices at Signify.
+In the next post, I will share my experience on leading the Matter integration over millions in-field and newly manufactured smart lighting devices at Signify.
 
 Stay tuned!
 

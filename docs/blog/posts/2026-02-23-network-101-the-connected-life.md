@@ -8,11 +8,9 @@ categories:
 ---
 
 # Network 101: The Connected Life
-The Internet of Things (IoT) has been a buzzword for over a decade. Yet, we still haven't reached the point of living in a truly connected world. 
+The Internet of Things (IoT) has been a buzzword for over a decade. Yet, we still haven't reached the point of living in a truly connected world. The truth is, even for an IoT PM like myself, the current smart home experience remains more of a frustration than a convenience.
 
 <!-- more -->
-
-I own a smart TV, Bluetooth speaker, and several connected light bulbs. However, I still find it awkward and often frustrating to automate my daily routines using those "smart devices".
 
 What is the key blocker for IoT? What is the shared vision of a connected digital lifestyle? Will the emergence of AI finally make the smart home truly smart? In this post, I'm going to take you on a journey exploring the evolution, the hurdles, and the future of the smart home.
 
@@ -40,7 +38,7 @@ This lack of interoperability hindered the mass-market penetration for several c
 
 1. Consumers were overwhelmed by technical jargon and incompatible standards. 
 2. Each platform, along with various manufacturer-specific apps, required a different onboarding process. 
-3. Some systems, notably Apple home, imposed strict OS restriction, requiring every home user to be an iPhone user.
+3. Some systems, notably Apple home, imposed strict OS restrictions, requiring every home user to be an iPhone user.
 
 Combined, these factors created a steep learning curve and high costs, making smart home adoption anything but easy. The industry recognized these barriers, leading to the release of Matter in 2022, a unified standard backed by all major brands.
 
@@ -56,7 +54,7 @@ Both Bluetooth and NFC are short-range wireless communication standards that hav
 - **Bluetooth or Bluetooth Classic** is a point-to-point wireless communication standard operating on the 2.4GHz ISM band. The onboarding mechanism is primarily based on "**Scanning, then Pairing**" with a typical range varying from 10 to 100 meters. 
     - **Key use cases:** audio streaming or data transfer via wireless peripherals like Airpod, keyboard, and smart watches.
     
-- **Bluetooth Low Energy (BLE)** is the power-optimized version specificlly designed for IoT. While it shares the same spectrum as Bluetooth, BLE offers a more streamlined connection process and significantly lower power consumption.
+- **Bluetooth Low Energy (BLE)** is the power-optimized version specifically designed for IoT. While it shares the same spectrum as Bluetooth, BLE offers a more streamlined connection process and significantly lower power consumption.
     - Topology-wise, BLE supports not only point-to-point, but also **broadcast** and **mesh** networking
     - Positioning features: 
         - Presence: Advertising-based detection
@@ -64,14 +62,12 @@ Both Bluetooth and NFC are short-range wireless communication standards that hav
         - Distance: Received signal strength indicator (RSSI)
 
 - **Near Field Communication (NFC)**
-Characterized by zero-setup and passive tag supoort, NFC operates within a range of 4 centimeters, providing proximity-based security.
-    - **Key use cases:** Contactless credit cards, transport passes, or any cards that support "tap to pair" mechanism.
+Characterized by zero-setup and passive tag support, NFC operates within a range of 4 centimeters, providing proximity-based security.
+    - **Key use cases:** Contactless credit cards, transport passes, or any cards that support the "tap to pair" mechanism.
 
-However, when it comes to scenarios such as connecting hundreds of devices across an entire house while maintaining stability and reliability, it's completely a different story. The industry requried more robust and scalable technologies to meet the actual demands of real-world deployment.
+However, when it comes to scenarios such as connecting hundreds of devices across an entire house while maintaining stability and reliability, it's completely a different story. The industry requries more robust and scalable technologies to meet the actual demands of real-world deployment.
 
-### Z-Wave & Zigbee
-
-#### Z-wave (1999)
+### Z-wave (1999)
 ![Z-Wave](https://upload.wikimedia.org/wikipedia/commons/3/34/Z-Wave_logo.svg)
 
 To that end, Z-Wave came into the picture in 1999 introduced by the Danish company, Zensys, which had later been acquired by Silicon Labs in 2018. 
@@ -81,17 +77,17 @@ Z-Wave is renowned for its secure but relatively closed ecosystem, as Silicon La
 However, Z-wave has struggled with mass-market adoption due to a few key factors: 
 
 - **Technical constraint**
-The requirement for specific frequency ranges makes it difficult to produce "global" product. Since each country defines its own Sub-GHz spectrum, manufacturers have to design different hardware variants for different markets.
+The requirement for specific frequency ranges makes it difficult to produce "global" products. Since each country defines its own Sub-GHz spectrum, manufacturers have to design different hardware variants for different markets.
 - **Cost Barriers**:
     - SKU complexity creates high inventory cost and additional R&D efforts
     - Limited suppliers leaves small room for price negotiation
     - Certification cost is hefty which often deters small manufacturers from joining the ecosystem
 
 
-#### Zigbee (2004)
+### Zigbee (2004)
 ![Zigbee](https://csa-iot.org/wp-content/uploads/2021/12/zb_logo-a_color_rgb-1.jpg)
 
-The emergence of Zigbee was an attempt by Zigbee Alliance (later renamed the "Connectivity Standards Alliance, CSA") to "unify" the smart home landscape. 
+The emergence of Zigbee was an attempt by the Zigbee Alliance (later renamed the "Connectivity Standards Alliance, CSA") to "unify" the smart home landscape. 
 
 The technology is based on the `IEEE 802.15.4` for low power mesh networking, operating on 2.4GHz band. It is famous for its flexibility, reliability, and well-structured stack, especially its clear behavior definition within application profiles.
 
@@ -102,11 +98,11 @@ Zigbee had successfully penetrated the mass market by:
     - and fostered a wide range of chip suppliers for cheaper options, affordable hardware
 - Allowing "manufacture specific clusters" 
 
-These strategies indeed attracted numerous manufactures to join the league, developing their smart home ecosystem based on Zigbee. However, the flexibility compromised the interoperability of the Zigbee ecosystem. For instance, a Zigbee light switch from one brand cannot communicate with a Zigbee light bulb from another. 
+These strategies indeed attracted numerous manufacturers to join the league, developing their smart home ecosystem based on Zigbee. However, the flexibility compromised the interoperability of the Zigbee ecosystem. For instance, a Zigbee light switch from one brand cannot communicate with a Zigbee light bulb from another. 
 
 At first, the root cause was mainly due to the unalignment of application profiles. This was later addressed in Zigbee 3.0 with a common application layer for all profiles including HA (Home Automation) and ZLL (Zigbee Light Link). Yet, the "manufacturer specific cluster" continued to hinder the interoperability, causing the fragmentation within the ecosystem. In reality, hardware companies often find it difficult to resist building their own closed system. Combined with a loose enforcement of certification, Zigbee fell short of winning over the smart home industry.
 
-Despite these challenges, Zigbee introduced several world-class smart home system like Philips Hue, one of the most successful smart lighting brands to date.
+Despite these challenges, Zigbee introduced several world-class smart home systems like Philips Hue, one of the most successful smart lighting brands to date.
 
 So far, the underlying logic behind Z-wave and Zigbee is quite similar, both relying on "hub-centric" architecture.
 
@@ -115,7 +111,7 @@ So far, the underlying logic behind Z-wave and Zigbee is quite similar, both rel
     - Connects to the Cloud for configuration and remote control
     - Dispatches commands to end-devices by translating high-level Cloud commands to device specific protocols 
 
-Yet, the requirement for a dedicated bridge to handle the translation is far from an ideal user experience. It complicates the onboarding flow, introduces the latency, and creates single point of a failure. 
+Yet, the requirement for a dedicated bridge to handle the translation is far from an ideal user experience. It complicates the onboarding flow, introduces latency, and creates a single point of failure. 
 
 This leads to a simple question: Could we have all devices communicate natively through IP, while still retaining the benefits of low power consumption and self-healing mesh networks?
 
@@ -165,13 +161,13 @@ Below is the Matter deck I developed for the in-house training:
 
 ## From Cloud to Local
 
-In IoT development, the **local first** mindset is important. First of all, network issues are inevitable. To ensure a seamless user experience, we have to design systems fully supports local communication. This approach largely avoids the latency issue and saves the day during internet outages. The primary reason why most smart home standards are built on mesh networking. Additionally, the key to a robust system often relies on mechanisms that could elegantly synchronize the decrepancies between behaviour of local devices and the cloud configurations. Always design fallback solutions to account for network instability or power outages.
+In IoT development, the **local first** mindset is important. First of all, network issues are inevitable. To ensure a seamless user experience, we have to design systems that fully support local communication. This approach largely avoids the latency issue and saves the day during internet outages. The primary reason why most smart home standards are built on mesh networking. Additionally, the key to a robust system often relies on mechanisms that could elegantly synchronize the discrepancies between behaviour of local devices and the cloud configurations. Always design fallback solutions to account for network instability or power outages.
 
 Secondly, security and privacy are critical, especially when it comes to personal identifiable information (PII) and medical data. In this case, a local-first or even a local-only policy serves a good option to mitigate cloud-based risks. However, since many users seldom change default SSIDs and passwords, making IoT secure by design is essential. We must ensure that home cameras, for instance, remain strictly for authorized users only rather than an open window for hackers. 
 
 > "The DJI Romo robovac had security so poor, this man remotely accessed thousands of them" *From [The Verge](https://www.theverge.com/tech/879088/dji-romo-hack-vulnerability-remote-control-camera-access-mqtt) Feb 14, 2026 at 4:00 PM GMT+8*
 
-Moreover, when we connect more devices like cardiac pacemakers or kitchen ovens, a single error or breach could lead to severe injury or damage. The potential for these devices to be hacked is a significant threat. That's why there are many new regulations and certifications of data integrity and in-good security practice are introduced across global markets.
+Moreover, when we connect more devices like cardiac pacemakers or kitchen ovens, a single error or breach could lead to severe injury or damage. The potential for these devices to be hacked is a significant threat. That's why there are many new regulations and certifications of data integrity and in-good security practices being introduced across global markets.
 
 ## Conclusion
 While legislation struggles to keep pace with technology, the industry continues to evolve, introducing new elements:
@@ -181,7 +177,7 @@ While legislation struggles to keep pace with technology, the industry continues
 
 Finally, due to the inherent nature of hardware, it's rare to see the same open source vibe from software communities. The industry's business model remains primarily on the hardware sales, now adding up with the additional software-as-a-service(SaaS) subscription fee, such as for cloud storage.
 
-In contrast, [Home Assistant](https://www.home-assistant.io), the most famous open source smart home community, insists on promoting true openess. Their philosophy is simple: users should have the full control of their own data. They believe everyone should have the power to build their preferred smart home experience that is easy to use and sercure by choice comparing to ecosystem lock-in by big companies. 
+In contrast, [Home Assistant](https://www.home-assistant.io), the most famous open source smart home community, insists on promoting true openness. Their philosophy is simple: users should have the full control of their own data. They believe everyone should have the power to build their preferred smart home experience that is easy to use and secure by choice compared to ecosystem lock-in by big companies. 
 
 In the next post, I'll share my experience of adopting Matter across our full product portfolio. Wait for it!
 

@@ -147,13 +147,17 @@ Below is the Matter deck I developed for the in-house training:
 ### Table of major smart home standards
 
 
-| Item                | Matter     | Thread               | Zigbee     | Z-wave     |
-|:------------------- |:---------- |:-------------------- |:---------- |:---------- |
-| **Year**            | 2022       | 2014                 | 2004       | 1999       |
+| Item | Matter | Thread | Zigbee | Z-wave |
+|:---------- |:---------- |:--------- |:---------- |:---------- |
+| **Year** | 2022 | 2014 | 2004 | 1999 |
+| **Foundation** | IP-based (802.11/ 802.15.4/ 802.3) | IEEE 802.15.4 | IEEE 802.15.4 | ITU-T G.9959 |
 | **Technical Stack** | Application layer | Network layer | Full stack | Full stack |
-| **Frequency**       | Runs on Wi-Fi/Thread   | 2.4GHz               | 2.4GHz     | Sub-GHz    |
-| **IP support**      | IPv4/v6    | IPv6                 | NA, requires bridge        | NA, requires bridge         |
-| **Topology** | (Depends) | Mesh|Mesh| Mesh|
+| **Frequency** | Runs on Wi-Fi/ Thread | 2.4GHz | 2.4GHz | Sub-GHz |
+| **IP support** | IPv4/ IPv6(mandatory) | IPv6 | No; bridge required | No; bridge required |
+| **Topology** | Depends (Star/ Mesh) | Mesh|Mesh| Mesh|
+| **Bridge** | No (Direct to router) | Border Router|Bridge| Bridge|
+| **Commission** | BLE/NFC/QR Code | BLE/NFC/QR Code|Pairing Button| Inclusion Mode|
+| **Main Strength** | Interoperability | IP-based mesh | Massive Adoption| Strong Penetration|
 
 
 ## From Cloud to Local

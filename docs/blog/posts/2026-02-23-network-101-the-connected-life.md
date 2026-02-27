@@ -94,7 +94,7 @@ Zigbee had successfully penetrated the mass market by:
 - Utilizing 2.4Ghz, a global standard 
     - which allowed for a single SKU worldwide
     - and fostered a wide range of chip suppliers for cheaper options, affordable hardware
-- Allowing "manufacture specific clusters" 
+- Allowing "manufacturer specific clusters" 
 
 These strategies indeed attracted numerous manufacturers to join the league, developing their smart home ecosystem based on Zigbee. However, the flexibility compromised the interoperability of the Zigbee ecosystem. For instance, a Zigbee light switch from one brand cannot communicate with a Zigbee light bulb from another. 
 
@@ -164,7 +164,7 @@ Below is the Matter deck I developed for the in-house training:
 
 In IoT development, the **local first** mindset is important. First of all, network issues are inevitable. To ensure a seamless user experience, we have to design systems that fully support local communication. This approach largely avoids the latency issue and saves the day during internet outages. The primary reason why most smart home standards are built on mesh networking. Additionally, the key to a robust system often relies on mechanisms that could elegantly synchronize the discrepancies between behaviour of local devices and the cloud configurations. Always design fallback solutions to account for network instability or power outages.
 
-Secondly, security and privacy are critical, especially when it comes to personal identifiable information (PII) and medical data. In this case, a local-first or even a local-only policy serves a good option to mitigate cloud-based risks. However, since many users seldom change default SSIDs and passwords, making IoT secure by design is essential. We must ensure that home cameras, for instance, remain strictly for authorized users only rather than an open window for hackers. 
+Secondly, security and privacy are critical, especially when it comes to personal identifiable information (PII) and medical data. In this case, a local-first or even a local-only policy serves a good option to mitigate cloud-based risks. However, since many users neglect security, seldom changing default SSIDs and passwords, making IoT secure by design is essential. We must ensure that home cameras, for instance, remain strictly for authorized users only rather than an open window for hackers. 
 
 > "The DJI Romo robovac had security so poor, this man remotely accessed thousands of them" *From [The Verge](https://www.theverge.com/tech/879088/dji-romo-hack-vulnerability-remote-control-camera-access-mqtt) Feb 14, 2026 at 4:00 PM GMT+8*
 

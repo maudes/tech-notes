@@ -89,10 +89,15 @@ RDK-B is a good fit for telecom giants, and is supported by industry leaders inc
 
 ### prpl, 2014
 Prpl foundation was founded in 2014, then released its renowned prplOS in 2018. What prpl aims to achieve is identical to the goals we previously discussed. But this time, they chose to combine the low layer engine of OpenWRT with a redesigned decoupling middleware based on BBF standards. The structure consists of:
+
 - High level API (northbound API)
+
 - prplOS
+
 - prplMesh
+
 - LCM
+
 - Low Level API (southbound API)
 
 The development of prpl is strongly driven by global operators like Orange and Deutsche Telekom. For those who used OpenWRT as their CPE foundation, prpl provides a seamless transition to a more secure, flexible and standardized framework. Today, prpl is gaining more traction with many ISPs listing it as a mandatory requirement in the RFQ (Request for Quotation). 

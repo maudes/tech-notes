@@ -68,7 +68,6 @@ Characterized by zero-setup and passive tag support, NFC operates within a range
 However, when it comes to scenarios such as connecting hundreds of devices across an entire house while maintaining stability and reliability, it's completely a different story. The industry requries more robust and scalable technologies to meet the actual demands of real-world deployment.
 
 ### Z-wave (1999)
-![Z-Wave](https://upload.wikimedia.org/wikipedia/commons/3/34/Z-Wave_logo.svg)
 
 To that end, Z-Wave came into the picture in 1999 introduced by the Danish company, Zensys, which had later been acquired by Silicon Labs in 2018. 
 
@@ -85,7 +84,6 @@ The requirement for specific frequency ranges makes it difficult to produce "glo
 
 
 ### Zigbee (2004)
-![Zigbee](https://csa-iot.org/wp-content/uploads/2021/12/zb_logo-a_color_rgb-1.jpg)
 
 The emergence of Zigbee was an attempt by the Zigbee Alliance (later renamed the "Connectivity Standards Alliance, CSA") to "unify" the smart home landscape. 
 
@@ -116,7 +114,6 @@ Yet, the requirement for a dedicated bridge to handle the translation is far fro
 This leads to a simple question: Could we have all devices communicate natively through IP, while still retaining the benefits of low power consumption and self-healing mesh networks?
 
 ### Thread (2014)
-![Thread](https://openthread.io/guides/images/ot-logo-thread.png?hl=zh-tw)
 
 Thus, here comes the Thread. The standard is laser-focused on offering a mesh-native, IP-native (IPv6 specifically), and interoperable network architecture operating on the 2.4GHz band. 
 

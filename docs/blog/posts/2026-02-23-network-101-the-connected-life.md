@@ -2,9 +2,9 @@
 date: 2026-02-27
 categories:
   - Network 101
+  - Market Trends
   - Standards
   - IoT
-  - Use Case
 ---
 
 # Network 101: The Connected Life

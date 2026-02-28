@@ -2,9 +2,8 @@
 date: 2026-02-18
 categories:
   - Network 101
+  - Market Trends
   - Standards
-  - SDN
-  - Use Case
 ---
 
 # Network 101: The Wireless Era

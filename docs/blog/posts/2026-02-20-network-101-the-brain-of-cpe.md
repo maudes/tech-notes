@@ -2,8 +2,8 @@
 date: 2026-02-20
 categories:
   - Network 101
+  - Market Trends
   - Standards
-  - SDN
   - CPE
 ---
 

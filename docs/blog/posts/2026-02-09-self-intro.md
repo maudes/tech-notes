@@ -2,7 +2,6 @@
 date: 2026-02-09
 categories:
   - Career Pivot
-  - IoT
 ---
 # Hello World! It's Maude from Taiwan.
 Hi there, I'm Maude. This is the place where I jot down learning notes, insights, architectural deep dives, and technical hurdles I've encountered in the world of wireless networking, IoT, and software development.

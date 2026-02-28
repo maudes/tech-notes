@@ -1,0 +1,1394 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Technical notes on IoT protocols (Matter, WiFi 7) and CPE software architectures (prpl, RDK-B, OpenSync).">
+      
+      
+        <meta name="author" content="Maude">
+      
+      
+        <link rel="canonical" href="https://maudes.github.io/tech-notes/blog/2026/02/27/network-101-the-connected-life/">
+      
+      
+        <link rel="prev" href="../../20/network-101-the-brain-of-cpes/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Network 101: The Connected Life - Maude's Tech Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Muli";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#network-101-the-connected-life" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="Maude&#39;s Tech Notes" class="md-header__button md-logo" aria-label="Maude's Tech Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Maude's Tech Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Network 101: The Connected Life
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../others/" class="md-tabs__link">
+          
+  
+  
+  Others
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://maudes.github.io/cv" class="md-tabs__link">
+        
+  
+  
+    
+  
+  My CV
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Maude&#39;s Tech Notes" class="md-nav__button md-logo" aria-label="Maude's Tech Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Maude's Tech Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    All Posts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/cpe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/career-pivot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Career Pivot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/iot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/market-trends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Market Trends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/network-101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network 101
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Others
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Others
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../others/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Random Crazy Works (WIP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://maudes.github.io/cv" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My CV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#market-trends-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Market Trends &amp; Evolution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-technologies-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Technologies &amp; Standards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Technologies &amp; Standards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bluetooth-ble-nfc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bluetooth, BLE &amp; NFC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#z-wave-1999" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Z-wave (1999)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zigbee-2004" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zigbee (2004)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thread-2014" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thread (2014)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matter-2022" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matter (2022)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-of-major-smart-home-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of major smart home standards
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#from-cloud-to-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Cloud to Local
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conclusion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2026-02-27 00:00:00+00:00" class="md-ellipsis">February 27, 2026</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/network-101/">Network 101</a>, 
+                              <a href="../../../../category/market-trends/">Market Trends</a>, 
+                              <a href="../../../../category/standards/">Standards</a>, 
+                              <a href="../../../../category/iot/">IoT</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              9 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+
+
+<h1 id="network-101-the-connected-life">Network 101: The Connected Life</h1>
+<p>The Internet of Things (IoT) has been a buzzword for over a decade. Yet, we still haven't reached the point of living in a truly connected world. The truth is, even for an IoT PM like myself, the current smart home experience remains more of a frustration than a convenience.</p>
+<!-- more -->
+
+<p>What is the key blocker for IoT? What is the shared vision of a connected digital lifestyle? Will the emergence of AI finally make the smart home truly smart? In this post, I'm going to take you on a journey exploring the evolution, the hurdles, and the future of the smart home.</p>
+<p><strong><em>Keywords: #Matter #Thread #Zigbee #Zwave</em></strong></p>
+<h2 id="market-trends-evolution">Market Trends &amp; Evolution</h2>
+<p>Movies such as "<em>2001: A Space Odyssey (1968)</em>" or manga like "<em>Ghost in the Shell (1989~1996)</em>" shared mind-blown possibilities for our future. In many aspects, they accurately forecast the cutting-edge technologies that are becoming a reality today. </p>
+<p>The development of these visions has evolved gradually over the decades. Piece by peice, we're bringing those wild dreams to our daily lives. Below is a list of remarkable innovations that come to mind:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Item</th>
+<th style="text-align: left;">Year</th>
+<th style="text-align: left;">Core impacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Walkman / iPod</strong></td>
+<td style="text-align: left;">1979 / 2001</td>
+<td style="text-align: left;">From tape to MP3: the portability and digitization of music</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Feature Phones</strong></td>
+<td style="text-align: left;">1990s</td>
+<td style="text-align: left;">The budding of mobile entertainment: Nokia "Snake"</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Smartphones</strong></td>
+<td style="text-align: left;">2007</td>
+<td style="text-align: left;">The emergence of mobile computing hubs</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bluetooth Devices</strong></td>
+<td style="text-align: left;">2000s</td>
+<td style="text-align: left;">Personal area networks (PAN) and wireless connectivity</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Wii Game Console</strong></td>
+<td style="text-align: left;">2006</td>
+<td style="text-align: left;">Motion sensing &amp; avatar</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Wearables (Fitbit)</strong></td>
+<td style="text-align: left;">2009</td>
+<td style="text-align: left;">Biometric data Input, the beginning of digital health</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Connected Appliances</strong></td>
+<td style="text-align: left;">2010</td>
+<td style="text-align: left;">IoT in daily life: manufacturers transitioning into service providers</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Smart Hub / Speaker</strong></td>
+<td style="text-align: left;">2014</td>
+<td style="text-align: left;">Smart home ecosystems with centralized hubs to address market fragmentation</td>
+</tr>
+</tbody>
+</table>
+<p>The market has evolved from isolated devices to sophisticated units, and finally to centralized hubs like Google Home or Apple Home. While these platforms partially addressed the fragmentation, they remained siloed by using different technologies such as Z-wave, Zigbee or Thread. Those stacks are not interoperable at the time.</p>
+<p>This lack of interoperability hindered the mass-market penetration for several clear reasons: </p>
+<ol>
+<li>Consumers were overwhelmed by technical jargon and incompatible standards. </li>
+<li>Each platform, along with various manufacturer-specific apps, required a different onboarding process. </li>
+<li>Some systems, notably Apple home, imposed strict OS restrictions, requiring every home user to be an iPhone user.</li>
+</ol>
+<p>Combined, these factors created a steep learning curve and high costs, making smart home adoption anything but easy. The industry recognized these barriers, leading to the release of Matter in 2022, a unified standard backed by all major brands.</p>
+<p>Before diving into Matter, let's take a closer look at the other key standards that shaped the smart home landscape. </p>
+<h2 id="key-technologies-standards">Key Technologies &amp; Standards</h2>
+<p><img alt="spectrum-tech" src="../../../../../assets/spectrum-tech.png" /></p>
+<h3 id="bluetooth-ble-nfc">Bluetooth, BLE &amp; NFC</h3>
+<p>Both Bluetooth and NFC are short-range wireless communication standards that have become ubiquitous in our daily lives. In the smart home ecosystem, those technologies often serve as the onboarding bridge to a more complex system.</p>
+<ul>
+<li>
+<p><strong>Bluetooth or Bluetooth Classic</strong> is a point-to-point wireless communication standard operating on the 2.4GHz ISM band. The onboarding mechanism is primarily based on "<strong>Scanning, then Pairing</strong>" with a typical range varying from 10 to 100 meters. </p>
+<ul>
+<li><strong>Key use cases:</strong> audio streaming or data transfer via wireless peripherals like Airpod, keyboard, and smart watches.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bluetooth Low Energy (BLE)</strong> is the power-optimized version specifically designed for IoT. While it shares the same spectrum as Bluetooth, BLE offers a more streamlined connection process and significantly lower power consumption.</p>
+<ul>
+<li>Topology-wise, BLE supports not only point-to-point, but also <strong>broadcast</strong> and <strong>mesh</strong> networking</li>
+<li>Positioning features: <ul>
+<li>Presence: Advertising-based detection</li>
+<li>Direction: Angle of Arrival (AoA) and Angle of Departure (AoD)</li>
+<li>Distance: Received signal strength indicator (RSSI)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Near Field Communication (NFC)</strong>
+Characterized by zero-setup and passive tag support, NFC operates within a range of 4 centimeters, providing proximity-based security.</p>
+<ul>
+<li><strong>Key use cases:</strong> Contactless credit cards, transport passes, or any cards that support the "tap to pair" mechanism.</li>
+</ul>
+</li>
+</ul>
+<p>However, when it comes to scenarios such as connecting hundreds of devices across an entire house while maintaining stability and reliability, it's completely a different story. The industry requries more robust and scalable technologies to meet the actual demands of real-world deployment.</p>
+<h3 id="z-wave-1999">Z-wave (1999)</h3>
+<p>To that end, Z-Wave came into the picture in 1999 introduced by the Danish company, Zensys, which had later been acquired by Silicon Labs in 2018. </p>
+<p>Z-Wave is renowned for its secure but relatively closed ecosystem, as Silicon Labs remained its sole chip provider for a significant period. This rigorous end-to-end control earned it a reputation for an extremely low "drop-off" rate and minimal disconnection issues. Unlike other smart home standards, Z-Wave operates on Sub-GHz which offers less interference and better signal penetration. These unique features made it the preferred choice for security-critical products such as smart locks and the high-end IoT market. </p>
+<p>However, Z-wave has struggled with mass-market adoption due to a few key factors: </p>
+<ul>
+<li><strong>Technical constraint</strong>
+The requirement for specific frequency ranges makes it difficult to produce "global" products. Since each country defines its own Sub-GHz spectrum, manufacturers have to design different hardware variants for different markets.</li>
+<li><strong>Cost Barriers</strong>:<ul>
+<li>SKU complexity creates high inventory cost and additional R&amp;D efforts</li>
+<li>Limited suppliers leaves small room for price negotiation</li>
+<li>Certification cost is hefty which often deters small manufacturers from joining the ecosystem</li>
+</ul>
+</li>
+</ul>
+<h3 id="zigbee-2004">Zigbee (2004)</h3>
+<p>The emergence of Zigbee was an attempt by the Zigbee Alliance (later renamed the "Connectivity Standards Alliance, CSA") to "unify" the smart home landscape. </p>
+<p>The technology is based on the <code>IEEE 802.15.4</code> for low power mesh networking, operating on 2.4GHz band. It is famous for its flexibility, reliability, and well-structured stack, especially its clear behavior definition within application profiles.</p>
+<p>Zigbee had successfully penetrated the mass market by:</p>
+<ul>
+<li>Utilizing 2.4Ghz, a global standard <ul>
+<li>which allowed for a single SKU worldwide</li>
+<li>and fostered a wide range of chip suppliers for cheaper options, affordable hardware</li>
+</ul>
+</li>
+<li>Allowing "manufacturer specific clusters" </li>
+</ul>
+<p>These strategies indeed attracted numerous manufacturers to join the league, developing their smart home ecosystem based on Zigbee. However, the flexibility compromised the interoperability of the Zigbee ecosystem. For instance, a Zigbee light switch from one brand cannot communicate with a Zigbee light bulb from another. </p>
+<p>At first, the root cause was mainly due to the unalignment of application profiles. This was later addressed in Zigbee 3.0 with a common application layer for all profiles including HA (Home Automation) and ZLL (Zigbee Light Link). Yet, the "manufacturer specific cluster" continued to hinder the interoperability, causing the fragmentation within the ecosystem. In reality, hardware companies often find it difficult to resist building their own closed system. Combined with a loose enforcement of certification, Zigbee fell short of winning over the smart home industry.</p>
+<p>Despite these challenges, Zigbee introduced several world-class smart home systems like Philips Hue, one of the most successful smart lighting brands to date.</p>
+<p>So far, the underlying logic behind Z-wave and Zigbee is quite similar, both relying on "hub-centric" architecture.</p>
+<ul>
+<li><strong>End-device</strong>: Supports ultra low power consumption, and simple, task-specific communication</li>
+<li><strong>Bridge</strong>:<ul>
+<li>Connects to the Cloud for configuration and remote control</li>
+<li>Dispatches commands to end-devices by translating high-level Cloud commands to device specific protocols </li>
+</ul>
+</li>
+</ul>
+<p>Yet, the requirement for a dedicated bridge to handle the translation is far from an ideal user experience. It complicates the onboarding flow, introduces latency, and creates a single point of failure. </p>
+<p>This leads to a simple question: Could we have all devices communicate natively through IP, while still retaining the benefits of low power consumption and self-healing mesh networks?</p>
+<h3 id="thread-2014">Thread (2014)</h3>
+<p>Thus, here comes the Thread. The standard is laser-focused on offering a mesh-native, IP-native (IPv6 specifically), and interoperable network architecture operating on the 2.4GHz band. </p>
+<p>Furthermore, Thread does not define an application layer. The design logic allows manufacturers to develop their own application layer as they wish. Brands build whatever unique features to distinguish themselves while relying on Thread as the infrastructure to ensure the underlying connectivity. </p>
+<p>Technically, Thread introduces several crucial improvements: </p>
+<ul>
+<li>The Thread border router (TBR) as the new "bridge":<ul>
+<li>Unlike traditional hubs, TBR does not translate commands. It simply routes IP packets to end-devices, improving communication speed and reducing latency. </li>
+<li>No more dedicated, standalone bridge is required! In Thread, TBR could be integrated with a smart speaker, control hub, router or even a TV, making the networking infrastructure invisible.</li>
+</ul>
+</li>
+<li>All thread devices, including low-power sensors, are IP native. That means they can natively understand the command packets from the Cloud or remote controllers without translators.</li>
+</ul>
+<p>Backed by tech giants like Google and Apple, Thread sounds like a perfect solution. However, it is still struggling to achieve mass market adoption due to a few key hurdles: </p>
+<ul>
+<li>
+<p>For manufacturers, Thread is attractive yet expensive. Most of them have already invested heavily in Wi-Fi, Zigbee or other protocols. It takes enormous resources to migrate from one technology to another. </p>
+</li>
+<li>
+<p>The user experience might not be as good as expected. In theory, users should be able to mix and match TBRs from different brands. Yet, interference and compatibility issues persist. The root cause is once again that manufacturers are reluctant to open their ecosystems with each other. Even with mandatory interoperability updates, certification takes time. By the time a better version is finally available via OTA (Over-the-air), frustrated users might have already thrown those devices away.</p>
+</li>
+</ul>
+<p>So, what is the missing piece? What technology can truly catalyze the smart home market and bridge those remaining gaps? </p>
+<h3 id="matter-2022">Matter (2022)</h3>
+<p>Matter then emerged, organized by the CSA and backed by every major player in the smart home market. It is an interoperabilty-native, open-source application layer that finally bridges the gap between different ecosystems.</p>
+<p>Below is the Matter deck I developed for the in-house training: </p>
+<div class="video-container">
+  <iframe src="https://docs.google.com/presentation/d/e/2PACX-.../embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+</div>
+
+<h3 id="table-of-major-smart-home-standards">Table of major smart home standards</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Item</th>
+<th style="text-align: left;">Matter</th>
+<th style="text-align: left;">Thread</th>
+<th style="text-align: left;">Zigbee</th>
+<th style="text-align: left;">Z-wave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Year</strong></td>
+<td style="text-align: left;">2022</td>
+<td style="text-align: left;">2014</td>
+<td style="text-align: left;">2004</td>
+<td style="text-align: left;">1999</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Foundation</strong></td>
+<td style="text-align: left;">IP-based (802.11/ 802.15.4/ 802.3)</td>
+<td style="text-align: left;">IEEE 802.15.4</td>
+<td style="text-align: left;">IEEE 802.15.4</td>
+<td style="text-align: left;">ITU-T G.9959</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Technical Stack</strong></td>
+<td style="text-align: left;">Application layer</td>
+<td style="text-align: left;">Network layer</td>
+<td style="text-align: left;">Full stack</td>
+<td style="text-align: left;">Full stack</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Frequency</strong></td>
+<td style="text-align: left;">Runs on Wi-Fi/ Thread</td>
+<td style="text-align: left;">2.4GHz</td>
+<td style="text-align: left;">2.4GHz</td>
+<td style="text-align: left;">Sub-GHz</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IP support</strong></td>
+<td style="text-align: left;">IPv4/ IPv6(mandatory)</td>
+<td style="text-align: left;">IPv6</td>
+<td style="text-align: left;">No; bridge required</td>
+<td style="text-align: left;">No; bridge required</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Topology</strong></td>
+<td style="text-align: left;">Depends (Star/ Mesh)</td>
+<td style="text-align: left;">Mesh</td>
+<td style="text-align: left;">Mesh</td>
+<td style="text-align: left;">Mesh</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bridge</strong></td>
+<td style="text-align: left;">No (Direct to router)</td>
+<td style="text-align: left;">Border Router</td>
+<td style="text-align: left;">Bridge</td>
+<td style="text-align: left;">Bridge</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Commission</strong></td>
+<td style="text-align: left;">BLE/NFC/QR Code</td>
+<td style="text-align: left;">BLE/NFC/QR Code</td>
+<td style="text-align: left;">Pairing Button</td>
+<td style="text-align: left;">Inclusion Mode</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Main Strength</strong></td>
+<td style="text-align: left;">Interoperability</td>
+<td style="text-align: left;">IP-based mesh</td>
+<td style="text-align: left;">Massive Adoption</td>
+<td style="text-align: left;">Strong Penetration</td>
+</tr>
+</tbody>
+</table>
+<h2 id="from-cloud-to-local">From Cloud to Local</h2>
+<p>In IoT development, the <strong>local first</strong> mindset is important. First of all, network issues are inevitable. To ensure a seamless user experience, we have to design systems that fully support local communication. This approach largely avoids the latency issue and saves the day during internet outages. The primary reason why most smart home standards are built on mesh networking. Additionally, the key to a robust system often relies on mechanisms that could elegantly synchronize the discrepancies between behaviour of local devices and the cloud configurations. Always design fallback solutions to account for network instability or power outages.</p>
+<p>Secondly, security and privacy are critical, especially when it comes to personal identifiable information (PII) and medical data. In this case, a local-first or even a local-only policy serves a good option to mitigate cloud-based risks. However, since many users neglect security, seldom changing default SSIDs and passwords, making IoT secure by design is essential. We must ensure that home cameras, for instance, remain strictly for authorized users only rather than an open window for hackers. </p>
+<blockquote>
+<p>"The DJI Romo robovac had security so poor, this man remotely accessed thousands of them" <em>From <a href="https://www.theverge.com/tech/879088/dji-romo-hack-vulnerability-remote-control-camera-access-mqtt">The Verge</a> Feb 14, 2026 at 4:00 PM GMT+8</em></p>
+</blockquote>
+<p>Moreover, when we connect more devices like cardiac pacemakers or kitchen ovens, a single error or breach could lead to severe injury or damage. The potential for these devices to be hacked is a significant threat. That's why there are many new regulations and certifications of data integrity and in-good security practices being introduced across global markets.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>While legislation struggles to keep pace with technology, the industry continues to evolve, introducing new elements:</p>
+<ul>
+<li><strong>GenAI integration</strong>: Platforms introduce the generative AI to streamline the smart home onboarding process and accelerate feature discovery. For example, AI can now suggest optimized automation routines tailored to users' home devices.</li>
+<li><strong>Ambient IoT</strong>: To achieve the ultimate goal of low power consumption, power harvesting from the surroundings through vibration, temperature, or radio waves is gaining traction in sensor design. </li>
+</ul>
+<p>Finally, due to the inherent nature of hardware, it's rare to see the same open source vibe from software communities. The industry's business model remains primarily on the hardware sales, now adding up with the additional software-as-a-service(SaaS) subscription fee, such as for cloud storage.</p>
+<p>In contrast, <a href="https://www.home-assistant.io">Home Assistant</a>, the most famous open source smart home community, insists on promoting true openness. Their philosophy is simple: users should have the full control of their own data. They believe everyone should have the power to build their preferred smart home experience that is easy to use and secure by choice compared to ecosystem lock-in by big companies. </p>
+<p>In the next post, I'll share my experience of adopting Matter across our full product portfolio. Wait for it!</p>
+<hr />
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="https://www.bluetooth.com/learn-about-bluetooth/tech-overview/">Bluetooth</a></li>
+<li><a href="https://z-wavealliance.org/learn-about-z-wave/">Z-wave</a></li>
+<li><a href="https://csa-iot.org/resources/developer-resources/">Matter</a></li>
+<li><a href="https://siliconlabs.github.io/matter/2.2.0-1.2/general/COMMISSIONING.html">Matter Commissioning</a></li>
+<li><a href="https://threadgroup.org/Newsroom/PID/1804/FilterMenu/1815/FilterCategories/19">Thread</a></li>
+<li><a href="https://openthread.io/platforms">OpenThread</a></li>
+<li><a href="https://csa-iot.org/all-solutions/zigbee/">Zigbee</a></li>
+<li><a href="https://www.silabs.com/documents/public/application-notes/an1117-migrating-zigbee-profiles-to-z30.pdf">Migrating to Zigbee 3.0</a></li>
+<li><a href="https://www.youtube.com/watch?v=j_Uwzjz0V8M">Smart Home of IoT Standards with Mitchell Klein</a></li>
+<li><a href="https://www.silabs.com/blog/matter-vs-z-wave-what-you-need-to-know">Silicon Labs</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/maudes" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/meng-hsueh-shen" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://medium.com/@maudeshen" target="_blank" rel="noopener" title="medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M369.4 32c43.4 0 78.6 35.2 78.6 78.6v83.8c-1.9-.1-3.8-.2-5.7-.2h-.4c-10 0-22.3 2.4-31.1 6.8-10 4.6-18.7 11.5-26 20.6-11.8 14.6-18.9 34.3-20.6 56.4-.1.7-.1 1.3-.2 2s-.1 1.2-.1 1.9c-.1 1.2-.1 2.4-.1 3.6 0 1.9-.1 3.8 0 5.8 1.2 50.1 28.2 90.2 76.3 90.2 2.7 0 5.3-.1 7.9-.4v20.4c0 43.4-35.2 78.6-78.6 78.6L78.6 480C35.2 480 0 444.8 0 401.4V110.6C0 67.2 35.2 32 78.6 32zM82.3 138.9l.3.1c13.2 3 19.8 7.4 19.8 23.4v187.2c0 16-6.7 20.4-19.9 23.4l-.3.1v2.8H135v-2.8l-.3-.1c-13.2-3-19.9-7.4-19.9-23.4V173.3l86.1 202.5h4.9l88.6-208.2v186.6c-1.1 12.6-7.8 16.5-19.7 19.2l-.3.1v2.7h91.9v-2.7l-.3-.1c-11.9-2.7-18.7-6.6-19.9-19.2l-.1-191.8h.1c0-16 6.7-20.4 19.9-23.4l.3-.1v-2.7h-72.2l-67 157.4-67-157.4H82.3zM448 340.3c-25.1-7.4-43-35.1-41.2-67.8h41.1v67.8zm-6.4-135.6c2.3 0 4.4.3 6.4.9V263h-40.2c1.5-33.6 13.6-57.9 33.8-58.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+    
+  </body>
+</html>

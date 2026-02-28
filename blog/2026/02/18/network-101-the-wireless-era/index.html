@@ -1,0 +1,1367 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Technical notes on IoT protocols (Matter, WiFi 7) and CPE software architectures (prpl, RDK-B, OpenSync).">
+      
+      
+        <meta name="author" content="Maude">
+      
+      
+        <link rel="canonical" href="https://maudes.github.io/tech-notes/blog/2026/02/18/network-101-the-wireless-era/">
+      
+      
+        <link rel="prev" href="../../14/network-101-the-foundation/">
+      
+      
+        <link rel="next" href="../../20/network-101-the-brain-of-cpes/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Network 101: The Wireless Era - Maude's Tech Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Muli";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#network-101-the-wireless-era" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="Maude&#39;s Tech Notes" class="md-header__button md-logo" aria-label="Maude's Tech Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Maude's Tech Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Network 101: The Wireless Era
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../others/" class="md-tabs__link">
+          
+  
+  
+  Others
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://maudes.github.io/cv" class="md-tabs__link">
+        
+  
+  
+    
+  
+  My CV
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Maude&#39;s Tech Notes" class="md-nav__button md-logo" aria-label="Maude's Tech Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Maude's Tech Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    All Posts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/cpe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CPE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/career-pivot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Career Pivot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/iot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IoT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/market-trends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Market Trends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/network-101/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network 101
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/standards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Others
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Others
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../others/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Random Crazy Works (WIP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://maudes.github.io/cv" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My CV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#spectrum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spectrum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wi-fi-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wi-Fi Standards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wi-Fi Standards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-wi-fi-4-era" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-Wi-Fi 4 era
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chasing-after-the-speed-the-high-throughput-era" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chasing after the speed, the High Throughput era
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#future-forecasting-the-ultra-high-reliability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future forecasting: the Ultra High Reliability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wi-fi-easymesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wi-Fi EasyMesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mobile-broadband-mbb-and-3gpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mobile Broadband (MBB) and 3GPP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mobile Broadband (MBB) and 3GPP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-internet-era-1g-to-2g" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-Internet Era: 1G to 2G
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-standardized-mobile-network-3g-and-4g" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A standardized mobile network: 3G and 4G
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5g-a-unified-and-more-capable-air-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5G, a unified and more capable air interface
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5G, a unified and more capable air interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#r15-the-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        R15, the foundation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#r16-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        R16 enhancement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#r17-expansion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        R17 expansion:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5g-advanced-r18-and-6g-forecast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5G-Advanced (R18~) and 6G forecast
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conclusion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2026-02-18 00:00:00+00:00" class="md-ellipsis">February 18, 2026</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/network-101/">Network 101</a>, 
+                              <a href="../../../../category/market-trends/">Market Trends</a>, 
+                              <a href="../../../../category/standards/">Standards</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              10 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+
+
+<h1 id="network-101-the-wireless-era">Network 101: The Wireless Era</h1>
+<p>How about starting your day with a cup of nice coffee and a quick scroll through emails and messages on your smartphone? Nowadays, it is probably hard to imagine life without a network; or to be specific, a life without a wireless network.</p>
+<!-- more -->
+
+<p>Back in the days, I still remember how annoying it was to check a single tiny picture online. You had to dial-up for Internet access using a modem and an ethernet cable, accompanied by those "beep-beep" sounds. Once you were finally online, it would take several minutes to download a standard 500×500 picture, rendering it pixel by pixel. Yet, today, we can see all high-definition pictures almost instantly, within milliseconds.</p>
+<p>In this context, how did the Internet evolve? What is the actual difference between 5G/4G and Wi-Fi? Furthermore, why does my ISP keep pushing me to adopt a Wi-Fi 7 router over my old Wi-Fi 5 one? What do all these terms mean?</p>
+<p><strong><em>Keywords: #Wi-Fi #3GPP</em></strong></p>
+<h2 id="spectrum">Spectrum</h2>
+<p>Before I dive into the wireless standards, let's talk a bit about the key resource behind the technology: the spectrum. </p>
+<p>Spectrum refers to the range of radio frequencies used for transmitting data wirelessly. The radio frequency, ranging from 3000 kHZ to 3000 GHz, is divided into various bands for different purposes.</p>
+<p>Some bands are reserved for public or specialized use, such as AM/FM radios, military or emergency services, which must be protected for critical situations. On the other hand, some are allocated for commercial use. For example:</p>
+<ul>
+<li><strong>Licensed spectrum:</strong> Mobile operators pay for exclusive rights to provide mobile broadband services like 4G and 5G. </li>
+<li><strong>Unlicensed spectrum</strong>: Those are open bands that Wi-Fi technology is using. As those are free for anyone, it's easier to encounter interference and traffic congestion.</li>
+</ul>
+<h2 id="wi-fi-standards">Wi-Fi Standards</h2>
+<p>Let's start with Wi-Fi. There are two key entities to know in terms of Wi-Fi standards:</p>
+<ul>
+<li>
+<p><strong>IEEE</strong> (sound: I triple E): sets standards such as <code>802.11 X</code></p>
+</li>
+<li>
+<p><strong>Wi-Fi Alliance (WFA)</strong>: runs industry interoperability tests for <code>Wi-Fi X</code> devices</p>
+</li>
+</ul>
+<p>The diagram below explains the evolution of Wi-Fi: 
+<img alt="wifi-evolution" src="../../../../../assets/wifi-evolution.png" /></p>
+<h3 id="pre-wi-fi-4-era">Pre-Wi-Fi 4 era</h3>
+<p>The first <code>802.11</code> standard appeared in 1997, and it has continued to evolve ever since. </p>
+<p>We can regard <code>Wi-Fi 4</code> as the turning point of the modern Wi-Fi. Before its arrival, the overall user experience was simply "<strong>SLOW</strong>". The backbone of pre-Wi-Fi 4 technology was SISO (single input single output). At this stage, the focus was merely making the technology functional enough for people to tolerate. The overall quality of service was far from the business-grade from today's point of view. For example, making a VoIP call would have suffered severely from high latency and jitter. </p>
+<p>Eventually, OFDM was introduced to mitigate interference, and significantly improve the service reliability. While Wi-Fi 3 (802.11 g), released in 2003, brought OFDM to 2.4GHz in addition to 5GHz, the digital world was growing fast too. The same year we had welcomed the launch of Skype, MySpace and Facemash which had become Facebook in 2004. </p>
+<h3 id="chasing-after-the-speed-the-high-throughput-era">Chasing after the speed, the High Throughput era</h3>
+<p>This was the golden age of the digital boom. Following the launch of the first iPhone in 2007, we suddenly had mind-blowing apps in the little screen right in our pockets. The vision of a true connected world seemed within reach. To that end, we had to upgrade the existing architecture for the growing traffic. </p>
+<p>To deliver the ultimate user experience, developers focused on two major approaches:</p>
+<ul>
+<li><strong>Enhancing capacity</strong><ul>
+<li>From dual bands to tri-band: 2.4/ 5/ 6GHz</li>
+<li>From 64-QAM to 4096-QAM</li>
+<li>Max data rate from 11 Mbps to 46 Gbps</li>
+<li>Channel sizes expanded from 20 MHz to 20/40/80/160/320 MHz</li>
+<li>SISO to MIMO (4x4 to 16x16)</li>
+</ul>
+</li>
+<li><strong>Improving efficiency &amp; reliability</strong><ul>
+<li>OFDM</li>
+<li>MU-MIMO (Downlink, Uplink)</li>
+<li>OFDMA with resource units (RU)</li>
+<li>TWT, rTWT for better power management</li>
+<li>Multiple Link Operation (MLO)</li>
+<li>Managed QoS &amp; Puncturing</li>
+</ul>
+</li>
+<li><strong>Others</strong><ul>
+<li>mandatory WPA3 since Wi-Fi 6E for protecting the new release 6GHz </li>
+</ul>
+</li>
+</ul>
+<p>Though the marketing always promoted the evolution as providing "High to Extremely High Throughput", it was actually the "efficiency improvements" that made the seamless streaming in a crowded stadium come true. </p>
+<p>From Wi-Fi 4 to Wi-Fi 7, the Wi-Fi technology has evolved to provide a stable, reliable, fast Internet user experience even in high density environments. With a solid foundation supporting high-resolution streaming, real-time gaming and AR/VR, we are ready for the next generation digital experience.</p>
+<h3 id="future-forecasting-the-ultra-high-reliability">Future forecasting: the Ultra High Reliability</h3>
+<p>Thought I missed something? Yup, the Internet of Things (IoT). </p>
+<p>Besides the above speed talk, we had power saving mechanisms such as TWT for saving the battery life of edge devices. We also built a robust infrastructure capable of supporting a massive amount of edge devices staying online and communicating to each other simultaneously. </p>
+<p>The current architecture might be sufficient for use cases like smart homes, smart stadiums, or even smart cities. However as we recruit more and more devices into our smart ecosystems, we must ensure the connection is as reliable as possible. Especially in scenarios like autonomous vehicles or critical life-saving medical applications, we cannot tolerate any latency as it is directly tied to human safety.</p>
+<p>As a result, the focus of the next generation Wi-Fi (802.11 bn) has shifted from throughput to reliability. Although the Wi-Fi alliance has not yet finalized the standard, we can already foresee a few key targets:</p>
+<ol>
+<li><strong>Multi-AP Coordination for enhanced coverage and efficiency</strong><ul>
+<li>Coordinated Spatial Reuse (CoSR)</li>
+<li>Coordinated Beamforming (CoBF)</li>
+</ul>
+</li>
+<li><strong>Optimized spectrum utilization to boost throughput</strong><ul>
+<li>Dynamic spectrum optimization (DSO)</li>
+<li>Non-Primary Channel Access (NPCA)</li>
+</ul>
+</li>
+<li><strong>Seamless convergence</strong> with cellular network to better user experience </li>
+</ol>
+<p>The primary use cases will include Industrial IoT for building private, high-uptime environments and Extended Reality (XR) for more immersive digital experience. Moreover, with the building blocks established by Wi-Fi 8, we can expect a seamless experience in telemedicine or mission-critical operations in remote areas. </p>
+<p>What else might appear in the future Wi-Fi? Artificial Intelligence, Machine Learning for network optimization, and even more frequency bands. Can't wait to see it!</p>
+<h3 id="wi-fi-easymesh">Wi-Fi EasyMesh</h3>
+<p>Here I want to mention "Mesh" a bit. The emergence of Mesh technology was driven by connectivity issues under heavy traffic and obstructed environments (also commonly known as dead zone/ blind spot). </p>
+<p>Unlike a traditional Star topology, mesh networks enable <code>seamless roaming</code> to expand the coverage and build a stable, reliable connection. The underlying technology is smart enough to dynamically determine the best route and signal for your end-devices. </p>
+<p>Before WFA released "EasyMesh" (802.11k/v/r) in 2018, there were many different mesh systems in the market which were incompatible with each other. The launch of EasyMesh is for solving the issue of interoperability. </p>
+<p>The latest EasyMesh specification <a href="https://www.wi-fi.org/system/files/Wi-Fi%20EasyMesh%20Specification%20v6.1.pdf">(v6.1)</a> already supports Wi-Fi 7 key features including Managed QoS and MLO. We can expect more for the Multi-AP in the upcoming Wi-Fi 8. </p>
+<p>Okay, we will have more mesh talk in a future post on smart home. Now, let's move on to the other pillar of wireless connectivity: Mobile Broadband. </p>
+<h2 id="mobile-broadband-mbb-and-3gpp">Mobile Broadband (MBB) and 3GPP</h2>
+<p>When we're talking about Wi-Fi, it's all about the indoor scenarios or use cases in specific spaces. But we also want to enjoy the seamless Internet access while on the move. This is where mobile broadband enters the picture. </p>
+<p>Below is the evolution of mobile network:
+<img alt="mbb-evolution" src="../../../../../assets/mbb-evolution.png" /></p>
+<h3 id="pre-internet-era-1g-to-2g">Pre-Internet Era: 1G to 2G</h3>
+<p>Unlike Wi-Fi technology, the origin of mobile broadband was aimed at providing a portable "phone" service. Before 1G, people had to find a landline for calling others. With the arrival of 1G, we saw the birth of "brick phones", extremely huge mobile phones solely for making calls. The technology was based on analog signals which were easily compromised by interference and background noise.</p>
+<p>However, if you have ever seen a first generation cell phone, you know it's impossible to be truly portable due to its size and weight. The industry then spent years optimizing the hardware until we finally reached a perfect portable "feature phone" for business elites and bosses to use. (Yes, it was still expensive.) </p>
+<p>At that time we had 2G networks which improved not only the voice quality via the adoption of digital signals, but also the short message service, low-speed data service and basic encryption of our data.</p>
+<h3 id="a-standardized-mobile-network-3g-and-4g">A standardized mobile network: 3G and 4G</h3>
+<p>People loved the idea and embraced the convenience of mobile connectivity. Around the same time, we had the Wi-Fi 1 released. Having the Internet at home, people naturally wanted to have the Internet on their mobile phones. The strong demand led to the birth of 3G. </p>
+<p>The breakthrough of 3G was not merely about Internet access. For the first time, a dedicated organization, 3GPP (The 3rd Generation Partnership Project), was formed for the global mobile broadband standards. Through their efforts, mobile operators finally worked on removing the barriers for global roaming. Users could finally enjoy the Internet access with their own mobile phone across different technical infrastructures worldwide.</p>
+<p>Soon after, the first MBB standard, 4G LTE, was released. While inheriting the design of "Radio Access Network (RAN)" from 3G, it was refactored to All-IP architecture. The shift was introduced with services updates including scalable bandwidth, VoLTE, OFDMA, and MIMO. The purpose of the structural change was for catching up the explosion of software services. </p>
+<p>Ring a bell? Yes, the iPhone story I mentioned in the Wi-Fi section. The launch of the first iPhone was truly a game changer that altered the market for good. We could now play games, stream movies, manage productivity tasks all on our phone. These market demands accelerated the pursuit of faster speed and higher throughput.</p>
+<h3 id="5g-a-unified-and-more-capable-air-interface">5G, a unified and more capable air interface</h3>
+<p>Before 5G, the path of MBB development was primarily on the end-user experience with phones. Yet, as shared in the Wi-Fi introduction, we're moving toward a fully connected world involving a broader range of devices. In this new landscape, the requests of the network expanded to reliability, stability, and adaptability to a variety of specialized environments. </p>
+<p>The famous "5G Triangle" defined the diverse services:</p>
+<ul>
+<li>
+<p><strong>Enhanced Mobile Broadband, eMBB</strong>: Continue on improving the speed and throughput which could be deployed fast for commercial use.</p>
+</li>
+<li>
+<p><strong>Ultra Reliable and Low Latency, uRLLC</strong>: Designed for mission critical applications including autonomous vehicle, remote surgery where milliseconds counts.</p>
+</li>
+<li>
+<p><strong>Massive Machine-Type Communication, mMTC</strong>: Industrial IoT focused, specifically supporting a massive number of connected devices with high power efficiency.</p>
+</li>
+</ul>
+<p>To deliver the next generation user experience, the 5G standard has released a series of changes. </p>
+<h4 id="r15-the-foundation"><strong>R15, the foundation</strong></h4>
+<p>First of all, 5G has further decoupled the low layer/ hardware structure toward a service-based architecture (SBA). This enabled the Standalone (<strong>SA</strong>) 5G network where the architecture is entirely different from the legacy system. Instead of relying on vendor-specific hardware, operators can now adopt Commercial Off-The-Shelf (COTS) servers combined with a software defined transport network base station. The new framework allows for a more flexible and cost-effective structure. However, considering the deployment cost and practical realities, operators could choose a mixed infrastructure, Non-Standalone (<strong>NSA</strong>), for the 5G experience in the short term by leveraging the existing 4G core network. (If you're interested in how the decoupling and structural changes, you may refer to the "<a href="https://www.mdpi.com/2076-3417/12/1/408">OpenRAN</a>".)</p>
+<p>This new structure offers an end-to-end flexibility or "<strong>Network slicing</strong>". The feature allows operators to deploy a true "Private Network". The demands usually come from the public sectors like first responders or law enforcement for ensuring the dedicated capacity for mission-critical operations.</p>
+<p>Another major leap in 5G was the expansion into more bands and wider bandwidth, categorized as below:</p>
+<ul>
+<li>
+<p><strong>Sub 6 (+Massive MIMO), FR1</strong>: Excellent penetration, wide coverage, long distance with more cost-effective infrastructure.</p>
+</li>
+<li>
+<p><strong>mmWave (+Beamforming), FR2</strong>: Poor penetration, high power consumption, but with extremely fast speed and high throughput.(Note: FWA uses mmWave.)</p>
+</li>
+</ul>
+<h4 id="r16-enhancement"><strong>R16 enhancement</strong></h4>
+<ul>
+<li>Unlicensed spectrum</li>
+<li>Advanced power saving and mobility</li>
+<li>High precision positioning</li>
+<li>Sidelink for vehicle to experience (V2X) use cases</li>
+<li>Mission critical design</li>
+</ul>
+<h4 id="r17-expansion"><strong>R17 expansion</strong>:</h4>
+<ul>
+<li>
+<p><strong>Reduced Capabilities (RedCap) aka 5G NR-Lite</strong>: Focusing on IoT mid-tier (e.g. smart grid, wearables, sensors), filling the gap of the major three scenarios. </p>
+</li>
+<li>
+<p><strong>Non-terrestrial networks (NTN)</strong>: Adding aerial communication such as satellites; operators including StarLink, Amazon Leo.</p>
+</li>
+</ul>
+<h4 id="5g-advanced-r18-and-6g-forecast">5G-Advanced (R18~) and 6G forecast</h4>
+<p>Features released from R18 onwards were called "5G Advanced". This signified the foundation architecture is completed, the focus has shifted toward enhancement that will bridge to the next generation, 6G.</p>
+<p>The mobile broadband system will be smarter on allocating and aggregating the frequency resources for low latency and reliability. The notorious network issues experienced while on the move are expected to be resolved, guaranteeing the QoS for advanced applications. </p>
+<ul>
+<li>AI/ ML native</li>
+<li>Digital twins</li>
+<li>Joint Communication and Sensing (JCAS) for exploring THz as sensor</li>
+<li>Convergence with Wi-Fi</li>
+<li>Sustainability</li>
+</ul>
+<p>Admittedly, the gap between the exciting vision and our current reality remains vast. There might be more regulation hurdles, hardware upgrades to be addressed before we live in a true connected world. But we're moving forward.</p>
+<p>(You may learn <a href="https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/5G-A-Rel-19-Presentation.pdf">more details</a> via Qualcomm slides.)</p>
+<h2 id="conclusion">Conclusion</h2>
+<p><img alt="wireless-evolution" src="../../../../../assets/wireless-evolution.png" /></p>
+<p>Whoa! What a long journey. After a brief tour of wireless technology, it is clear that the trend has expanded from user-centered use cases to being industrial-scenario focused.</p>
+<p>Additionally, the structural revolution of mobile broadband carries a bold ambition on breaking down the proprietary barriers of legacy manufacturers to an unified, software defined platform for all.</p>
+<p>Last but not the least, we can see that in the next generation of technology: 6G and Wi-Fi 8, there will be an ever deeper convergence of the two in order to fulfill the vision of a real connected society. </p>
+<p>So, how will our home router adapt to the new wireless technology? In the next post, I'll introduce the building blocks of modern CPEs and the potential evolution of the genre. For example, could we see a "CPE version of app store"?</p>
+<p>Stay tuned!</p>
+<hr />
+<h3 id="reference">Reference</h3>
+<ul>
+<li>Wi-Fi<ul>
+<li><a href="https://www.tp-link.com/tw/landing/wifi8/">TP-Link/ Wi-Fi 8</a></li>
+<li><a href="https://www.ti.com/video/series/understanding-wi-fi-6-with-ti.html#transcript-tab">Texas Instruments/ Wi-Fi 6 Introduction</a></li>
+<li><a href="https://www.mediatek.com/hubfs/MediaTek%20Assets/Pdfs/White_Papers/MDT3011_Pioneering_the_Future_with_WiFi8_WhitePaper_v6.pdf">Mediatek/ The Future with Wi-Fi 8 White Paper</a></li>
+<li><a href="https://www.ultrontek.com/news_detail/wifi-8-802-11bn-trends-challenges-analysis">Ultrontek/ Wi-Fi 8</a></li>
+</ul>
+</li>
+<li>Mobile Broadband<ul>
+<li><a href="https://academy.qualcomm.com/course-catalog/Introduction-to-5G-5G-Adv-and-6G">Qualcomm/ Introduction to 5G, 5G Adv and 6G</a></li>
+<li><a href="https://www.keysight.com/us/en/assets/7123-1050/ebooks/Next-Generation-Wireless-A-Guide-to-the-Fundamentals-of-6G.pdf">Keysight/ Next Generation Wireless</a></li>
+<li><a href="https://www.ericsson.com/en/reports-and-papers/mobility-report/reports/november-2025">Ericsson/ Mobility Report 2025</a></li>
+<li><a href="https://www.ericsson.com/en/reports-and-papers/ericsson-technology-review/articles/mobile-miracles">Ericsson/ The History of Mobile Broadband</a></li>
+<li><a href="https://www.nokia.com/asset/i/207276/">Nokia/ 5G R16 &amp; R17</a></li>
+<li><a href="https://www.ultrontek.com/news_detail/evolution-of-mobile-communication-1g-to-6g">Ultrontek/ The History of Mobile Network</a></li>
+<li><a href="https://images.samsung.com/is/content/samsung/p5/global/business/networks/insights/white-paper/who-and-how_making-5g-nr-standards/white-paper_who-and-how_making-5g-nr-standards.pdf">Samsung/ Who &amp; How Making 5G NR Standards</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/maudes" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/meng-hsueh-shen" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://medium.com/@maudeshen" target="_blank" rel="noopener" title="medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M369.4 32c43.4 0 78.6 35.2 78.6 78.6v83.8c-1.9-.1-3.8-.2-5.7-.2h-.4c-10 0-22.3 2.4-31.1 6.8-10 4.6-18.7 11.5-26 20.6-11.8 14.6-18.9 34.3-20.6 56.4-.1.7-.1 1.3-.2 2s-.1 1.2-.1 1.9c-.1 1.2-.1 2.4-.1 3.6 0 1.9-.1 3.8 0 5.8 1.2 50.1 28.2 90.2 76.3 90.2 2.7 0 5.3-.1 7.9-.4v20.4c0 43.4-35.2 78.6-78.6 78.6L78.6 480C35.2 480 0 444.8 0 401.4V110.6C0 67.2 35.2 32 78.6 32zM82.3 138.9l.3.1c13.2 3 19.8 7.4 19.8 23.4v187.2c0 16-6.7 20.4-19.9 23.4l-.3.1v2.8H135v-2.8l-.3-.1c-13.2-3-19.9-7.4-19.9-23.4V173.3l86.1 202.5h4.9l88.6-208.2v186.6c-1.1 12.6-7.8 16.5-19.7 19.2l-.3.1v2.7h91.9v-2.7l-.3-.1c-11.9-2.7-18.7-6.6-19.9-19.2l-.1-191.8h.1c0-16 6.7-20.4 19.9-23.4l.3-.1v-2.7h-72.2l-67 157.4-67-157.4H82.3zM448 340.3c-25.1-7.4-43-35.1-41.2-67.8h41.1v67.8zm-6.4-135.6c2.3 0 4.4.3 6.4.9V263h-40.2c1.5-33.6 13.6-57.9 33.8-58.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+    
+  </body>
+</html>

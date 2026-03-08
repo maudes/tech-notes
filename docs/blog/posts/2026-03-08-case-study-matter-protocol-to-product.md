@@ -93,11 +93,9 @@ accTitle: Matter DAC Provisioning Flow (Simplified Diagram)
 
     %% PKI Hierarchy
     CSA[CSA - Root of Trust] --> PAA[PAA]
-    PAA --> PAI1["PAI: Brand A (Lighting)"]
-    PAA --> PAI2["PAI: Brand B (Sensors)"]
-
-    %% Certificate Management
-    subgraph Cloud["PAA/PAI Cloud"]
+    subgraph Cloud["PKI Cloud"]
+        PAA --> PAI1["PAI: Brand A (Lighting)"]
+        PAA --> PAI2["PAI: Brand B (Sensors)"]
         PAI1 --> KMS1["Cloud KMS / HSM<br>(Sign DACs)"]
         PAI2 --> KMS2["Cloud KMS / HSM"]
     end

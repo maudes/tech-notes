@@ -151,9 +151,7 @@ Will there be a unified future for CPE frameworks? Based on current trends, the 
 
 Once the architecture is unified, where would be the next battlefield for ISPs or OEMs? I believe the competition will shift toward the add-on software services, including advanced IoT capabilities, AI-driven QoS, and highly customizable network features as we've seen in the software evolution. 
 
-In the next post, I will share my experience on leading the Matter integration over millions in-field and newly manufactured smart lighting devices at Signify.
-
-Stay tuned!
+In the next post, I’ll dive into the Smart Home ecosystem, exploring the trends and standards like Matter that are finally bringing order to the chaos. Stay tuned!
 
 ---
 ### Reference

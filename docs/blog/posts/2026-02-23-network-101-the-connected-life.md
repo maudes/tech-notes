@@ -181,7 +181,7 @@ Finally, due to the inherent nature of hardware, it's rare to see the same open 
 
 In contrast, [Home Assistant](https://www.home-assistant.io), the most famous open source smart home community, insists on promoting true openness. Their philosophy is simple: users should have the full control of their own data. They believe everyone should have the power to build their preferred smart home experience that is easy to use and secure by choice compared to ecosystem lock-in by big companies. 
 
-In the next post, I'll share my experience of adopting Matter across our full product portfolio. Wait for it!
+In the next post, I'll share my experience on leading the Matter integration over millions in-field and newly manufactured smart lighting devices at Signify. Wait for it!
 
 ---
 ### Reference

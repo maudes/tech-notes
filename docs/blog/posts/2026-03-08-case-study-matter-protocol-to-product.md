@@ -152,6 +152,9 @@ The adventure didn't stop at the factory. While we tackled the major technical b
 
 I'll delve into those topics in the second half of this journey. Stay tuned!
 
+### Related Posts
+- [Case Study: Matter, from Brand to Ecosystem](docs/blog/posts/2026-03-08-case-study-matter-brand-to-ecosystem.md)
+
 ---
 ### Reference
 - [Matter specs](https://csa-iot.org/resources/developer-resources/)

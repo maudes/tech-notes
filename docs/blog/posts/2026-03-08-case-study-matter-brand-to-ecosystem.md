@@ -138,6 +138,9 @@ Now, I'm in the OEM business which is not famous for encouraging innovation. Yet
 
 Stay tuned!
 
+### Related Posts
+- [Case Study: Matter, from Protocol to Product](docs/blog/posts/2026-03-08-case-study-matter-protocol-to-product.md)
+
 ---
 ### Reference
 - [Matter specs](https://csa-iot.org/resources/developer-resources/)

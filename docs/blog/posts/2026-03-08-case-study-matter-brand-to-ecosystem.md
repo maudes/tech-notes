@@ -63,7 +63,7 @@ As an early Matter adopter, we had a great chance to together fine tune the expe
 
 Additionally, the partnership at this stage allowed us to impact the design on the platform side, including the certification flow (e.g. Work with Google Home, Work with Apple home badges etc.), adjustments of the existing cloud API, and home console features that may benefit us. Following the good relationship, we could also leverage the power of platforms to promote our products. It was mostly a win-win situation. 
 
- ``` mermaid
+``` mermaid
 graph TD
 accTitle: Matter Certification & Production Flow (Simplified)
 
@@ -91,8 +91,7 @@ accTitle: Matter Certification & Production Flow (Simplified)
     style Brand fill:#e1f5fe,stroke:#01579b,stroke-width:2px
     style VC fill:#fff4dd,stroke:#d4a017
     style Factory_Process fill:#f5f5f5,stroke:#666,stroke-dasharray: 5 5
-  
- ```
+```
 
 One point in terms of the certification badges. Before Matter, manufacturers had to apply for it one by one on each platform console. The process included: registration, testing (via labs or co-test with their cert team. It depends.), and launch the integration. It was often a tedious, repetitive process. But with Matter, now all of them allow manufactures to gain those badges by providing the "pass" testing results from Matter interop lab. That will be a great relief for manufacturers.  
 

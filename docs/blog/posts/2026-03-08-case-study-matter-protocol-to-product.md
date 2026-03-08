@@ -87,7 +87,7 @@ Each Matter certified end-device has to be flashed with a unique DAC for verific
 - **CD(certification declaration)**
 Finally, I would bulk update the certified product data onto the DCL once CDs were issued by CSA.
 
- ``` mermaid
+``` mermaid
 graph TD
 accTitle: Matter DAC Provisioning Flow (Simplified Diagram)
 
@@ -121,7 +121,7 @@ accTitle: Matter DAC Provisioning Flow (Simplified Diagram)
     style CSA fill:#f9f,stroke:#333,stroke-width:2px
     style Factory fill:#f5f5f5,stroke:#666,stroke-dasharray: 5 5
     style VC fill:#e1f5fe,stroke:#01579b
- ```
+```
 
 This overall process involves coordinating multiple cloud environments across:
 

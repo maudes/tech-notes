@@ -31,7 +31,7 @@ Now, I'm moving forward to user flows, privacy, partnership management, and new 
 ### Challenge 1: UX & Multi-Admin
 Apart from the firmware integration, another core topic was to bridge the user experience and data flow via cloud. 
 
-#### ＊The App flow
+#### The App flow
 In the standard Matter workflow, manufacturers often feel invisible since the platform handles most of the user interaction. This raised a critical concern: how do we encourage new users to engage with our app and service? 
 
 Indeed, the request itself is pretty much at odds with the philosophy of Matter. However, maintaining a direct connection with users is vital for hardware brands. Besides requesting "manufacturer-specific" metadata from platform partners, I tackled this challenge through three aspects:
@@ -44,7 +44,7 @@ I quickly realized the last one was a mistake. I regretted keeping this legacy c
 
 *Note: The QR code retrieval page wasn't just a standalone feature. It served as a centralized Matter dashboard for existing users to manually trigger Matter commissioning mode for any compatible devices already in their homes.*
 
-#### ＊Privacy under multi-admin scenario
+#### Privacy under multi-admin scenario
 As a global brand, we understand the importance of privacy. I'd deployed the GDPR compliant adjustments to our service. One key thing is having users' consent after presenting the full disclosure policy note at the beginning of the user journey.
 
 Yet, in the IoT scenario, it's getting complex due to the involvement of multiple players. This had been discussed thoroughly with the internal legal team and Matter working group at the time. Since users could install devices directly to any Matter platform, who should be responsible for the user consent and how to manage it. Moreover, Matter could run entirely locally. The information could possibly stay local instead of sharing to the platform. 
@@ -56,7 +56,7 @@ This might change following the evolution of laws or the technical/ architecture
 
 ### Challenge 2: Partnerships & New Opportunities
 
-#### ＊Partnership management
+#### Partnership management
 By nature, IoT is a multi-player game. Unlike pure software, it highly depends on network infrastructure and cross-platform coordination. A common scenario involves a home hub serving as the central controller, connecting devices like lighting, HVAC, Kitchen appliances and more. In this case, we would need to maintain good relationships with platforms. The major four are Google, Alexa, Apple, and SmartThings. 
  
 As an early Matter adopter, we had a great chance to together fine tune the experience with those platforms. During the process, we even provisioned hundreds of sample devices to partners for multiple rounds of tests, alpha, beta or dogfood, you name it. By doing so, we gained valuable test results on issues we may have ignored, and helped us optimize the design and performance. The partnerships supported us to reach the ideal testing scope that one company may not reach.
@@ -65,7 +65,7 @@ Additionally, the partnership at this stage allowed us to impact the design on t
 
 One point in terms of the certification badges. Before Matter, manufacturers had to apply for it one by one on each platform console. The process included: registration, testing (via labs or co-test with their cert team. It depends.), and launch the integration. It was often a tedious, repetitive process. But with Matter, now all of them allow manufactures to gain those badges by providing the "pass" testing results from Matter interop lab. That will be a great relief for manufacturers.  
 
-#### ＊New opportunities: EAP and bundle sales
+#### New opportunities: EAP and bundle sales
 The good relationships brought media exposure and potential new opportunities. One thing was having the chance to collaborate on new cool features through their Early Access Program (EAP). Yet, unlike those big tech giants, the manufacturer side normally won't have a big development team as they do. This indicated the capable resources might usually be insufficient. 
  
 I would strongly suggest being very careful before agreeing on any EAP. I once navigated a challenging situation where the risks I raised were overlooked. You would not want to experience that.
@@ -85,8 +85,7 @@ This project was a testament to how standardized protocols like Matter can accel
 
 ### Challenge 3: OEMs
 Our BU also supports private label business. So, I had a chance to be the technical contact to our clients. Before Matter, my job was sharing our API features and scope, then guiding them through the legal and technical process. With Matter, I was the go-to guy for clients to understand the standard and potential packages of their own Matter product lines.
- 
-#### ＊OEMs
+
 Our clients surely wanted to know more about Matter. In this case, I spent quite some time developing the technical sales deck with our BD team. 
 
 The pros of Matter is they had the spec prepare for this. For example, in CD, there are two option fields: 

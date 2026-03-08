@@ -64,10 +64,9 @@ As an early Matter adopter, we had a great chance to together fine tune the expe
 Additionally, the partnership at this stage allowed us to impact the design on the platform side, including the certification flow (e.g. Work with Google Home, Work with Apple home badges etc.), adjustments of the existing cloud API, and home console features that may benefit us. Following the good relationship, we could also leverage the power of platforms to promote our products. It was mostly a win-win situation. 
 
  ``` mermaid
----
-title: Matter Certification & Production Flow (Simplified)
----
 graph TD
+accTitle: Matter Certification & Production Flow (Simplified)
+
     %% Certs
     ATL[CSA Authorized Test Labs] -- Pass --> CSA[CSA Certification Flow]
     Others["Wi-Fi / BT / Thread<br>Certification"] -- Pass --> CSA

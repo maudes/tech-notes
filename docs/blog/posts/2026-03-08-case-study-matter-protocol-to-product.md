@@ -88,10 +88,9 @@ Each Matter certified end-device has to be flashed with a unique DAC for verific
 Finally, I would bulk update the certified product data onto the DCL once CDs were issued by CSA.
 
  ``` mermaid
- ---
-title: Matter DAC Provisioning Flow (Simplified Diagram)
----
 graph TD
+accTitle: Matter DAC Provisioning Flow (Simplified Diagram)
+
     %% PKI Hierarchy
     CSA[CSA - Root of Trust] --> PAA[PAA]
     PAA --> PAI1["PAI: Brand A (Lighting)"]

@@ -87,11 +87,48 @@ Each Matter certified end-device has to be flashed with a unique DAC for verific
 - **CD(certification declaration)**
 Finally, I would bulk update the certified product data onto the DCL once CDs were issued by CSA.
 
+ ``` mermaid
+ ---
+title: Matter DAC Provisioning Flow (Simplified Diagram)
+---
+graph TD
+    %% PKI Hierarchy
+    CSA[CSA - Root of Trust] --> PAA[PAA]
+    PAA --> PAI1["PAI: Brand A (Lighting)"]
+    PAA --> PAI2["PAI: Brand B (Sensors)"]
+
+    %% Certificate Management
+    subgraph Cloud["PAA/PAI Cloud"]
+        PAI1 --> KMS1["Cloud KMS / HSM<br>(Sign DACs)"]
+        PAI2 --> KMS2["Cloud KMS / HSM"]
+    end
+
+    %% Factory Flow
+    subgraph Factory["Factory Provisioning Flow"]
+        KMS1 <-- "Auth / Order" --> BU["Brand BU Cloud"]
+        BU <-- "Request Provisioning" --> VC["Vendor Cloud<br>(Chip Provider)"]
+        
+        %% DAC Distribution
+        VC -- "Secure Tunnel" --> FL["Production Line Tool<br>(Flash Tool)"]
+        
+        FL --> DAC1["DAC for Bulb 001"]
+        FL --> DAC2["DAC for Bulb 002"]
+        
+        DAC1 --> Device1["Flashed Chip: Bulb 001"]
+        DAC2 --> Device2["Flashed Chip: Bulb 002"]
+    end
+
+    %% Styles
+    style CSA fill:#f9f,stroke:#333,stroke-width:2px
+    style Factory fill:#f5f5f5,stroke:#666,stroke-dasharray: 5 5
+    style VC fill:#e1f5fe,stroke:#01579b
+ ```
+
 This overall process involves coordinating multiple cloud environments across:
 
-- PAA cloud: Issues PAI and DAC
-- BU cloud: Mapping data between PAA cloud,  manufacturing side and internal schemes
-- Chip vendor cloud: Connect with the BU cloud for handling secure flashing
+- **PAA cloud**: Issues PAI and DAC
+- **BU cloud**: Mapping data between PAA cloud,  manufacturing side and internal schemes
+- **Chip vendor cloud**: Connect with the BU cloud for handling secure flashing
 
 It took us almost a full year to finalize a feasible working process with all parties, and integrate it into our NPI process.
 

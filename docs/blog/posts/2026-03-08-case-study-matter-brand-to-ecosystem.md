@@ -57,11 +57,11 @@ This might change following the evolution of laws or the technical/ architecture
 ### Challenge 2: Partnerships & New Opportunities
 
 #### Partnership management
-By nature, IoT is a multi-player game. Unlike pure software, it highly depends on network infrastructure and cross-platform coordination. A common scenario involves a home hub serving as the central controller, connecting devices like lighting, HVAC, Kitchen appliances and more. In this case, we would need to maintain good relationships with platforms. The major four are Google, Alexa, Apple, and SmartThings. 
+By nature, IoT is a collaborative ecosystem. Unlike pure software, it highly depends on network infrastructure and cross-platform interdependence. A common scenario involves a home hub serving as the central controller, connecting diverse devices such as lighting, HVAC, Kitchen appliances and more. In this environment, maintaining  strong relationships with major platforms, Google, Alexa, Apple, and SmartThings, is essential. 
  
-As an early Matter adopter, we had a great chance to together fine tune the experience with those platforms. During the process, we even provisioned hundreds of sample devices to partners for multiple rounds of tests, alpha, beta or dogfood, you name it. By doing so, we gained valuable test results on issues we may have ignored, and helped us optimize the design and performance. The partnerships supported us to reach the ideal testing scope that one company may not reach.
+As an early Matter adopter, we had an unique opportunity to fine-tune the user experience in direct collaboration with these platforms. During this process, we provisioned hundreds of sample devices to partners for extensive testing phases, including dogfood, alpha, and beta sessions. This collaboration provided us with invaluable feedback on edge cases we might have otherwise overlooked, allowing us to optimize both design and performance. These partnerships enabled a testing scope that would be impossible for a single company to achieve alone. 
 
-Additionally, the partnership at this stage allowed us to impact the design on the platform side, including the certification flow (e.g. Work with Google Home, Work with Apple home badges etc.), adjustments of the existing cloud API, and home console features that may benefit us. Following the good relationship, we could also leverage the power of platforms to promote our products. It was mostly a win-win situation. 
+Furthermore, engaging at this stage allowed us to influence platform-side design, including the certification workflows (e.g. "Work with Google Home" and "Work with Apple Home" badges etc.), Cloud API adjustments, and home console features that directly benefit our brand. By leveraging these strong relationships, we could also utilize platform-driven marketing to promot our device, creating a win-win situation. 
 
 ``` mermaid
 graph TD
@@ -93,18 +93,27 @@ accTitle: Matter Certification & Production Flow (Simplified)
     style Factory_Process fill:#f5f5f5,stroke:#666,stroke-dasharray: 5 5
 ```
 
-One point in terms of the certification badges. Before Matter, manufacturers had to apply for it one by one on each platform console. The process included: registration, testing (via labs or co-test with their cert team. It depends.), and launch the integration. It was often a tedious, repetitive process. But with Matter, now all of them allow manufactures to gain those badges by providing the "pass" testing results from Matter interop lab. That will be a great relief for manufacturers.  
+Regarding certification badges: Before Matter, manufacturers had to apply for badges individually through each platform's console. The process typically involved registration, sample preparation, lab testing (or co-test with their internal teams), and finally launching the integration. It was often a tedious, repetitive cycle. With Matter, platforms now allowed manufactures to obtain these badges by simply providing the "pass" results from Matter interop lab. This shift represents a huge relief for manufacturers, significantly streamlining the path to market. 
+
+#### Working Groups in Matter
+My team and I had spent considerable time participating in Matter working groups. It is a warm, supportive community that helped us scale our knowledge rapidly. I highly recommond joining these groups. Go for it. It's the best environment to connect with like-minded experts and clarify requirements with the best in the industry. In this section, I'd like to share our experience collaborating with CSA officials. 
+
+The CSA certification framework was initially not as user-firendly as those for Wi-Fi or Bluetooth. As a lighting company, we produce hundreds of SKUs based on the same firmware. However, early policy required each finished product with a distinct form factor to be certified individually. For company as our scale, the certification cost would have been astronomical. To address this,a cross-BU task forces had been formed to research and propose a "Family certification" concept similar to those found in other standards. We successfully convinced CSA to adopt and approve this concept just before our massive manufacturing rollout, resulting in significant cost savings.  
+
+On other occasion, we envountered a situation where the CSA unexpectedly withheld our certification. I immediately formed a squat team once been informed the situation and coordinated with Signify HQ to arrange an emergency sync with the CSA certification group. The issue stemmed from our use of one shared PID across multiple models, which was a strategic decision based on our manufacturing and inventory management. 
+
+> The product was a LED strip with a universal form factor and firmware base. To optimize the inventory allocation and cost efficiency, final assembly with the power supply was dynamically determined based on market orders. Since we could not perdict whether a product will be assigned as a US or EU version during early production, we opted to use a single PID for SKUs across different markets. 
 
 #### New opportunities: EAP and bundle sales
-The good relationships brought media exposure and potential new opportunities. One thing was having the chance to collaborate on new cool features through their Early Access Program (EAP). Yet, unlike those big tech giants, the manufacturer side normally won't have a big development team as they do. This indicated the capable resources might usually be insufficient. 
+Strong partnerships brought not only media exposure but also strategic opportunities such as collaborating new features through the Early Access Program (EAP). Yet, unlike big tech giants, the manufacturer side typically do not have the same vast development resources. The disparity means that even with a capable team, resources can quickly become overextended.  
  
-I would strongly suggest being very careful before agreeing on any EAP. I once navigated a challenging situation where the risks I raised were overlooked. You would not want to experience that.
+I would strongly suggest being very cautious before committing to any EAP. I once navigated a challenging situation where the risks I raised were overlooked. It is an experience I do not want others to repeat.
 
-In addition to technical related opportunities, I also had a chance to make our product FFS-certified (Frustration-Free Setup). It's an important certification program from the Alexa side that provides a seamless integration for Alexa home users. And, it's the ticket for any potential real deals on Amazon. 
+Beyond technical opportunities, I also led the initiatives to get our products FFS-certified (Frustration-Free Setup). This is an critical Alexa certification that ensures a seamless experience for Alexa home users and it is often the prerequisite for significant retail deals on Amazon. 
  
-> FFS allows a seamless OOTB experience where the device is pre-registered to the user's Alexa account upon purchase. The flow requires an unique barcode on the packaging which directly links to that device and its corresponding Matter data. That's how Alexa could find and commission the device once it's power-on. 
+> FFS delivers a seamless OOTB experience where the device is pre-registered to the user's Alexa account upon purchase. The flow requires an unique barcode on the packaging which directly links to that device and its corresponding Matter data. This allows Alexa to automatically discover and commission the device the moment it is powered on. 
 
-Through our close partnership with the Alexa team, we secured the invitation to this program just in time for the Black Friday season. Thanks to the foundation we built for Matter. After reviewing their spec, we simply:
+Through our close partnership with the Alexa team, we secured the invitation to this program just in time for the Black Friday season. Thanks to the foundation we built for Matter. After reviewing the spec, we excure the following:
 
 - Integrated Alexa-specific fields into our data schemes
 - Updated Matter tooling with feature flag for FFS 
@@ -115,19 +124,16 @@ Through our close partnership with the Alexa team, we secured the invitation to 
 This project was a testament to how standardized protocols like Matter can accelerate specialized business opportunities.
 
 ### Challenge 3: OEMs
-Our BU also supports private label business. So, I had a chance to be the technical contact to our clients. Before Matter, my job was sharing our API features and scope, then guiding them through the legal and technical process. With Matter, I was the go-to guy for clients to understand the standard and potential packages of their own Matter product lines.
+Our BU also supports private label partnerships, where I served as the primary technical point of contact for our clients. Prior to Matter, the sales-technical portion of my role involved outlining our API features and guiding clients through legal and technical onboarding. With the advent of Matter, I became the subject matter expert, helping clients navigate the new standard and identifying potential solutions for their Matter enabled product lines.
 
-Our clients surely wanted to know more about Matter. In this case, I spent quite some time developing the technical sales deck with our BD team. 
-
-The pros of Matter is they had the spec prepare for this. For example, in CD, there are two option fields: 
+Given the intense market interest, I collaborate closely with our business development team. One of Matter's significantly advantages is that the specification was designed with these business models in mind. For example, the CD includes below two optional fields: 
 
 - dac_origin_vid
 - dac_origin_pid 
 
-This means, any third-party companies can buy finished products with OEM-data flashed DAC and update with CDs having dac_origin fields through Certification Transfer Program afterwards.  
+This means, any third-party companies can procure finished products with OEM-data DAC and subsequently update them with CDs containing `dac_origin` fields through the Certification Transfer Program.  
  
-Yet, to do a proper OEM/ODM business, the implementation of PKI and support for customization are crucial. I didn't think we had enough resources and capability at the time. Plus, this sector was not exactly our focus as a business. But, it's worth digging considering industries like CPEs or small appliances have heavily relied on the OEM/ODM model. 
-
+However, to sacle a successful OEM/ODM business under Matter, the PKI implementation and high levels of customization support are crucial. At the time, I felt we lack the dedicated resources and specialized capability to fully commit to this sector, as it wasn't our primary business focus. Nevertheless, this remains an area worth exploring, especially as industries like CPEs or small appliances continue to rely heavily on the OEM/ODM model. 
 
 ## Conclusion
 Thanks for reading. This is the rough story of my Matter journey in those three full years. 

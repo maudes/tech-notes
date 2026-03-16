@@ -139,11 +139,13 @@ So, what is the missing piece? What technology can truly catalyze the smart home
 
 Matter then emerged, organized by the CSA and backed by every major player in the smart home market. It is an interoperabilty-native, open-source application layer that finally bridges the gap between different ecosystems.
 
-Below is the Matter deck I developed for the in-house training: 
+Below is the Matter deck I developed for in-house training: 
 
 <div class="video-container">
   <iframe src="https://docs.google.com/presentation/d/16Xoymub6k_AzMp03kzUYewRorP_aYW34U8guT-ogqIQ/embed" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 </div>
+
+During my time at Signiy, I collaborated with major telecoms including Verizon, Orange, Liberty Global, and Deutsche Telekom. While these providers all aim to become the central smart home hub for households, the question remains: how? The emergence of Matter, paired with robust software support from Home Assistant-certified SDKs or Google Home APIs, may provide the long-awaited solution.
 
 ### Table of major smart home standards
 

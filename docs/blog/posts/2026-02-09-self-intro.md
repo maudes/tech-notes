@@ -18,23 +18,26 @@ After four years in the media industry, I decided to pivot my career toward Soft
 
 ### My "After Life" as a Software Product Manager 
 
-This is definitely not an easy journey, yet a challenging and grateful one. I met many people who are willing to give me a chance and support me to be a better product manager. I also encountered skepticism from those who prioritize traditional CS degrees over diverse backgrounds.
+This is definitely not an easy journey, yet a challenging and rewarding one. I met many people who are willing to give me a chance and support me to be a better product manager. I also encountered skepticism from those who prioritize traditional CS degrees over diverse backgrounds.
 
 Imposter syndrome has been a constant companion on this journey. It's crucial to navigate through and keep moving forward. 
 
-Looking back on my footprints:
+**My milestones so far:**
+* Participated in development workshops (RoR, Laravel).
+* Gained experience through internships and side projects including SALASUSU and SmallSomebody.
+* Transitioned into my first Software PM role through internal referrals.
+* Worked at **Signify (formerly Philips Lighting)** in Hong Kong, exploring the global IoT ecosystem.
 
-* Joined workshops like RoR, Laravel
-* Gained experience through internships and side-projects including SALASUSU and SmallSomebody
-* Got hired as a software PM for the first time thanks to the referring of colleagues
-* Earned the chance to work at Signify (previously Philips Lighting) in Hong Kong, exploring the world of IoT
-
-All these experiences have nurtured my growth and pushed me to go further. In 2024/25, I left Signify because I don't want to stay in the comfort zone. I took a rest and attended a hackathon and startup contest. I learned and worked with my teammates as a backend developer/ PM. I started to rethink my career so far.
+In 2024/25, I stepped out of my comfort zone at Signify to attend hackathons and startup contests, working as both a backend developer and a PM. This period of reflection allowed me to rethink my career trajectory.
 
 ### Next Step
-Now, I'm working in the CPE OEM industry to gain a deeper, ground-level understanding of networking infrastructure. You might wonder: why dive into the world of CPE and OEM hardware? 
+I am currently working in the **CPE (Customer Premises Equipment) OEM** industry to gain a ground-level understanding of networking infrastructure. Why dive into the world of hardware and OEMs? 
 
-For me, the answer is simple: Software is where the magic happens, but Hardware is where the reality begins. To build truly robust IoT solutions and seamless software experiences, I need to understand the "pipes" they run on. However, my heart remains firmly in the software realm. I believe that code is the ultimate tool for breaking limitations and turning hardware into something alive.
+For me, the answer is strategic:
+
+1.  **CPE is the Gateway:** At Signify, I realized that over 80% of smart home issues were unrelated to our products. They were caused by home network settings or glitches. To master IoT, I must understand the "entry point" of the network.
+
+2.  **The OEM/ODM Reality:** This is the backbone of global electronics production. I am spending this year deeply understanding the business logic and workflows of this model.
 
 This blog is my commitment to that belief. Here, I’ll document how I’m navigating the complexities of networking, always with the goal of building more intuitive, powerful software products.
 

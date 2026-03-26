@@ -23,6 +23,7 @@ This is definitely not an easy journey, yet a challenging and rewarding one. I m
 Imposter syndrome has been a constant companion on this journey. It's crucial to navigate through and keep moving forward. 
 
 **My milestones so far:**
+
 * Participated in development workshops (RoR, Laravel).
 * Gained experience through internships and side projects including SALASUSU and SmallSomebody.
 * Transitioned into my first Software PM role through internal referrals.

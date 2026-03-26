@@ -24,9 +24,12 @@ Imposter syndrome has been a constant companion on this journey. It's crucial to
 
 **My milestones so far:**
 
-* Participated in development workshops (RoR, Laravel).
+- Participated in development workshops (RoR, Laravel).
+
 * Gained experience through internships and side projects including SALASUSU and SmallSomebody.
+
 * Transitioned into my first Software PM role through internal referrals.
+
 * Worked at **Signify (formerly Philips Lighting)** in Hong Kong, exploring the global IoT ecosystem.
 
 In 2024/25, I stepped out of my comfort zone at Signify to attend hackathons and startup contests, working as both a backend developer and a PM. This period of reflection allowed me to rethink my career trajectory.

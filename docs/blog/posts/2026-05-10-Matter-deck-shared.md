@@ -6,7 +6,7 @@ categories:
   - Matter
   - IoT
   - Slides
-image: docs/assets/matter-deck-cover.png
+image: ../assets/matter-deck-cover.png
 ---
 # OpenShare: Matter in a Nutshell, Q1'26 
 Back in March, I had a great time sharing my insights on the Matter protocol as an SME with over 50 R&D colleagues. Our discussion focused specifically on the CPE (Customer Premises Equipment) space. I hope this provides some valuable insights! I’m looking forward to seeing more network service providers join the ecosystem and release Matter-enabled routers in the near future.

@@ -31,7 +31,7 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy # 代碼複製按鈕
-    - optimize.social_cards
+    
 
 nav:
   - Home: 
@@ -46,6 +46,8 @@ extra:
       link: https://github.com/maudes
     - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/in/meng-hsueh-shen
+    - icon: fontawesome/brands/simple-substack
+      link: https://maudeshen.substack.com
     - icon: fontawesome/brands/medium
       link: https://medium.com/@maudeshen
 
